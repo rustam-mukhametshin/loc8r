@@ -8,6 +8,16 @@ html
         link(rel='stylesheet', href='/stylesheets/all.min.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
     body
+        nav.navbar.fixed-top.navbar-expand-md.navbar-light
+            .container
+                a.navbar-brand(href='/') Loc8r
+                    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarMain')
+                        span.navbar-toggler-icon
+                    #navbarMain.navbar-collapse.collapse
+                ul.navbar-nav.mr-auto
+                    li.nav-item
+                    a.nav-link(href='/about') About
+
         block content
 
         script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")
