@@ -13,7 +13,7 @@ const homelist = function (req, res) {
  * @param res
  */
 const locationInfo = function (req, res) {
-    res.render('index', {title: 'Location info'});
+    res.render('location-info', {title: 'Location info'});
 }
 
 /**
