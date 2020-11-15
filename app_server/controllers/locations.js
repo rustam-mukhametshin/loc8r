@@ -95,7 +95,10 @@ const locationInfo = function (req, res) {
  * @param res
  */
 const addReview = function (req, res) {
-    res.render('location-review-form', {title: 'Add review'});
+    res.render('location-review-form', {
+        title: 'Add review',
+        pageHeader: {title: 'Review Starcups'}
+    });
 }
 
 
