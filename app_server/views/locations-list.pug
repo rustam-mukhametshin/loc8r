@@ -1,5 +1,7 @@
 extends layout
 
+include _includes/sharedHTMLfunctions
+
 block content
     .row.banner
         .col-12
@@ -12,11 +14,7 @@ block content
                     .card-block
                         h4
                             a(href="/location")= location.name
-                            small &nbsp;
-                                - for (let i = 1; i <= location.rating; i++)
-                                i.fas.fa-star
-                                - for(let i = location.rating; i < 5; i++)
-                                i.far.fa-star
+                            +outputRating(location.rating)
                             span.badge.badge-pill.badge-default.float-right= location.distance
                         p.address= location.address
                         .facilities
