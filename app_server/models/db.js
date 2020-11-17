@@ -37,6 +37,13 @@ const gracefulShutdown = (msg, callback) => {
     })
 }
 
+// For nodemon restarts
+process.once('SIGUSR2', () => {
+    gracefulShutdown('nodemon restart', () => {
+        process.kill(process.pid, 'SIGUSR2');
+    });
+})
+
 // For app termination
 process.on('SIGINT', () => {
     gracefulShutdown('app termination', () => {
