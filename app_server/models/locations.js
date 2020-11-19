@@ -15,6 +15,21 @@ const openingTimeSchema = new Schema({
     }
 })
 
+const reviewSchema = new Schema({
+    author: String,
+    rating: {
+        type: Number,
+        required: true,
+        min: 0,
+        max: 5
+    },
+    reviewText: String,
+    createdOn: {
+        type: Date,
+        'default': Date.now
+    }
+})
+
 const locationSchema = new Schema({
     name: {
         type: String,
@@ -32,7 +47,8 @@ const locationSchema = new Schema({
         type: {type: String},
         coordinates: [Number]
     },
-    openingTimes: [openingTimeSchema]
+    openingTimes: [openingTimeSchema],
+    reviews: [reviewSchema]
 });
 
 locationSchema.index({coords: '2dsphere'})
