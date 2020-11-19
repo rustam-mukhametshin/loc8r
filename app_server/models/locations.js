@@ -14,5 +14,11 @@ const locationSchema = new Schema({
         min: 0,
         max: 5
     },
-    facilities: [String]
-})
+    facilities: [String],
+    coords: {
+        type: {type: String},
+        coordinates: [Number]
+    }
+});
+
+locationSchema.index({coords: '2dsphere'})
