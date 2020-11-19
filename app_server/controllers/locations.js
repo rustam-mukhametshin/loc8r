@@ -6,6 +6,7 @@
 const homelist = function (req, res) {
     res.render('locations-list', {
         title: 'Loc8r - find a palce to work with wifi',
+        description: 'Looking for wifi and a seat? Loc8r helps you find places to work when out and about.',
         pageHeader: {
             title: 'Loc8r',
             strapline: 'Find places to work with wifi near you!'
