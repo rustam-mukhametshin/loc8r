@@ -1,3 +1,7 @@
+const mongoose = require('mongoose');
+
+const Loc = mongoose.model('Location');
+
 /**
  *
  * @param req
@@ -17,12 +21,34 @@ const locationsUpdateOne = (req, res) => {
 };
 
 /**
- *
+ * Show single location.
  * @param req
  * @param res
  */
 const locationsReadOne = (req, res) => {
 
+    Loc
+        .findById(req.params.locationId)
+        .exec((err, loc) => {
+
+            if (!loc) {
+                return res
+                    .status(404)
+                    .json({
+                        message: 'Location not found'
+                    })
+
+            } else if (err) {
+                return res
+                    .status(404)
+                    .json(err)
+            }
+
+            return res
+                .status(200)
+                .json(loc)
+
+        });
 };
 
 /**
