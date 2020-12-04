@@ -60,12 +60,17 @@ const locationsCreate = (req, res) => {
 
 };
 /**
- *
+ * Show all locations
  * @param req
  * @param res
  */
 const locationsListByDistance = (req, res) => {
 
+    Loc.find().exec((err, loc) => {
+        return res
+            .status(200)
+            .json(loc);
+    });
 };
 
 module.exports = {
