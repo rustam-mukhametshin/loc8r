@@ -80,6 +80,14 @@ const locationsListByDistance = async (req, res) => {
         limit: 10
     };
 
+    if (!lng || !lat) {
+        return res
+            .status(404)
+            .json({
+                message: 'lng and lat query parameters are required'
+            });
+    }
+
     try {
         const results = await Loc.aggregate([
             {
@@ -106,7 +114,9 @@ const locationsListByDistance = async (req, res) => {
             .json(locations);
 
     } catch (err) {
-        console.log(err);
+        res
+            .status(404)
+            .json(err);
     }
 };
 
