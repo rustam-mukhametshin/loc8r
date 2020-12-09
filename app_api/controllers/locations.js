@@ -59,7 +59,6 @@ const locationsReadOne = (req, res) => {
 const locationsCreate = (req, res) => {
     const body = req.body;
 
-    // Todo fix 213
     Loc.create({
         name: body.name,
         address: body.address,
@@ -71,12 +70,19 @@ const locationsCreate = (req, res) => {
                 parseFloat(body.lat)
             ]
         },
+        // Todo Change to dynamic
         openingTimes: [
             {
-                days: body.days,
-                opening: body.opening,
-                closing: body.closing,
-                closed: body.closed
+                days: body.days1,
+                opening: body.opening1,
+                closing: body.closing1,
+                closed: body.closed1
+            },
+            {
+                days: body.days2,
+                opening: body.opening2,
+                closing: body.closing2,
+                closed: body.closed2
             }
         ]
     }, (err, location) => {
