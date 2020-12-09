@@ -57,7 +57,39 @@ const locationsReadOne = (req, res) => {
  * @param res
  */
 const locationsCreate = (req, res) => {
+    const body = req.body;
 
+    // Todo fix 213
+    Loc.create({
+        name: body.name,
+        address: body.address,
+        facilities: req.body.facilities.split(","),
+        coords: {
+            type: "Point",
+            coordinates: [
+                parseFloat(body.lng),
+                parseFloat(body.lat)
+            ]
+        },
+        openingTimes: [
+            {
+                days: body.days,
+                opening: body.opening,
+                closing: body.closing,
+                closed: body.closed
+            }
+        ]
+    }, (err, location) => {
+        if (err) {
+            res
+                .status(400)
+                .json(err)
+        } else {
+            res
+                .status(201)
+                .json(location);
+        }
+    });
 };
 /**
  * Show all locations
