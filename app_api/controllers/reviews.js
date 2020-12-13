@@ -75,6 +75,50 @@ const reviewsReadOne = (req, res) => {
 };
 
 /**
+ * Add review to location
+ *
+ * @param req
+ * @param res
+ * @param location
+ */
+function doAddReview(req, res, location) {
+
+    if (!location) {
+        res
+            .status(404)
+            .json({message: 'Location not found'});
+    } else {
+        const {author, rating, reviewText} = req.body;
+
+        // Add new review object to reviews array of objects.
+        location.reviews.push({
+            author,
+            rating,
+            reviewText
+        });
+
+        // Update reviews and average ratings
+        location.save((err, loc) => {
+            if (err) {
+                res
+                    .status(400)
+                    .json(err);
+            } else {
+
+                // Update location rating
+                updateAverageRating(loc._id);
+
+                const thisReview = location.reviews.slice(-1).pop();
+
+                res
+                    .status(201)
+                    .json(thisReview);
+            }
+        });
+    }
+}
+
+/**
  * Create new review
  *
  * @param req
