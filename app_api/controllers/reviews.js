@@ -75,12 +75,30 @@ const reviewsReadOne = (req, res) => {
 };
 
 /**
+ * Create new review
  *
  * @param req
  * @param res
  */
 const reviewsCreate = (req, res) => {
-
+    const locationId = req.params.locationId;
+    if (locationId) {
+        Loc
+            .findById(locationId)
+            .select('reviews')
+            .exec((err, location) => {
+                if (err) {
+                    res.status(400)
+                        .json(err);
+                } else {
+                    doAddReview(req, res, location);
+                }
+            })
+    } else {
+        res
+            .status(400)
+            .json({message: 'Location not found'});
+    }
 };
 
 
