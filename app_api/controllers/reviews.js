@@ -75,6 +75,22 @@ const reviewsReadOne = (req, res) => {
 };
 
 /**
+ * Update average rating
+ *
+ * @param locationId
+ */
+function updateAverageRating(locationId) {
+    Loc
+        .findById(locationId)
+        .select('rating reviews')
+        .exec((err, location) => {
+            if (!err) {
+                doSetAverageRating(location);
+            }
+        })
+}
+
+/**
  * Add review to location
  *
  * @param req
