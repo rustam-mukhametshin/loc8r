@@ -75,6 +75,31 @@ const reviewsReadOne = (req, res) => {
 };
 
 /**
+ * Set new average rating
+ *
+ * @param location
+ */
+function doSetAverageRating(location) {
+    if (location.reviews && location.reviews.length > 0) {
+
+        const count = location.reviews.length;
+        const total = location.reviews.reduce((acc, rating) => {
+            return acc + rating;
+        }, 0);
+
+        location.rating = parseInt(total / count, 10);
+
+        location.save(err => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(`Average rating updated to ${location.rating}`);
+            }
+        });
+    }
+}
+
+/**
  * Update average rating
  *
  * @param locationId
