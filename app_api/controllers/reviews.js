@@ -83,7 +83,7 @@ function doSetAverageRating(location) {
     if (location.reviews && location.reviews.length > 0) {
 
         const count = location.reviews.length;
-        const total = location.reviews.reduce((acc, rating) => {
+        const total = location.reviews.reduce((acc, {rating}) => {
             return acc + rating;
         }, 0);
 
