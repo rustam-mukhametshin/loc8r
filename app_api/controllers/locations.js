@@ -12,7 +12,6 @@ const locationsDeleteOne = (req, res) => {
 };
 
 /**
- *
  * Update location
  *
  * @param req
@@ -84,7 +83,8 @@ const locationsUpdateOne = (req, res) => {
 };
 
 /**
- * Show single location.
+ * Show single location
+ *
  * @param req
  * @param res
  */
@@ -115,6 +115,7 @@ const locationsReadOne = (req, res) => {
 };
 
 /**
+ * Create location
  *
  * @param req
  * @param res
@@ -160,8 +161,10 @@ const locationsCreate = (req, res) => {
         }
     });
 };
+
 /**
  * Show all locations
+ *
  * @param req
  * @param res
  */
