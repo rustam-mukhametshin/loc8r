@@ -13,11 +13,74 @@ const locationsDeleteOne = (req, res) => {
 
 /**
  *
+ * Update location
+ *
  * @param req
+ * @param req.params.locationId Location
+ * @param req.body
  * @param res
  */
 const locationsUpdateOne = (req, res) => {
+    let locId = req.params.locationId;
 
+    if (!locId) {
+        return res
+            .status(404)
+            .json({
+                message: 'Not found, locationId is required'
+            })
+    }
+
+    Loc.findById(locId)
+        .select('-reviews -rating')
+        .exec((err, location) => {
+            if (!location) {
+                return res
+                    .status(404)
+                    .json({
+                        message: 'locationId not found'
+                    })
+            } else if (err) {
+                return res
+                    .status(404)
+                    .json(err);
+            }
+
+            let body = req.body;
+
+            location.name = body.name;
+            location.address = body.address;
+            location.facilities = body.facilities.split(','); // ?
+
+            location.coords = {
+                type: "Point",
+                coordinates: [
+                    parseFloat(body.lng),
+                    parseFloat(body.lat)
+                ]
+            };
+
+            location.openingTimes = [
+                {
+                    days: body.days1,
+                    opening: body.opening1,
+                    closing: body.closing1,
+                    closed: body.closed1
+                }
+            ];
+
+            location.save((err, loc) => {
+                if (err) {
+                    res
+                        .status(404)
+                        .json(err);
+                } else {
+                    res
+                        .status(200)
+                        .json(loc);
+                }
+            })
+        })
 };
 
 /**
