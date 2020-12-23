@@ -214,7 +214,7 @@ const locationsListByDistance = async (req, res) => {
         limit: 10
     };
 
-    if (!lng || !lat) {
+    if ((!lng && lng !== 0) || (!lat && lat !== 0)) {
         return res
             .status(404)
             .json({
