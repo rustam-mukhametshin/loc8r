@@ -3,11 +3,41 @@ const mongoose = require('mongoose');
 const Loc = mongoose.model('Location');
 
 /**
+ * Delete location
  *
  * @param req
+ * @param req.params.locationId Location
  * @param res
  */
 const locationsDeleteOne = (req, res) => {
+    let locId = req.params.locationId;
+
+    if (locId) {
+
+        Loc
+            .findByIdAndRemove(locId)
+            .exec((err, loc) => {
+
+                if (err) {
+                    return res
+                        .status(404)
+                        .json(err);
+                }
+
+                return res
+                    .status(204)
+                    .json(null);
+            });
+
+    } else {
+
+        return res
+            .status(404)
+            .json({
+                message: 'Not found, locationId is required'
+            })
+    }
+
 
 };
 
