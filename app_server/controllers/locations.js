@@ -30,22 +30,16 @@ const homelist = function (req, res) {
     }
 
     request(requestOptions, (err, response, body) => {
-        if (err) {
-            console.log('error', err);
+        let data = [];
 
-        } else if (response.statusCode === 200) {
-            let data = [];
-
+        if (response.statusCode === 200 && body.length) {
             data = body.map((item) => {
                 item.distance = formatDistance(item.distance);
                 return item;
             });
-
-            renderHomepage(req, res, data);
-
-        } else {
-            console.log('status', response.statusCode);
         }
+
+        renderHomepage(req, res, data);
     })
 }
 
