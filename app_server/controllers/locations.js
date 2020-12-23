@@ -1,3 +1,5 @@
+const request = require('request');
+
 // Todo: move to external
 const apiOptions = {
     server: 'http://localhost:3000'
@@ -14,7 +16,30 @@ if (process.env.NODE_ENV === 'production') {
  * @param res
  */
 const homelist = function (req, res) {
-    renderHomepage(req, res);
+    const path = '/api/locations';
+
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,
+        method: 'GET',
+        json: {},
+        qs: {
+            lng: -0.7992599,
+            lat: 51.378091,
+            maxDistance: 20
+        }
+    }
+
+    request(requestOptions, (err, response, body) => {
+        if (err) {
+            console.log('error', err);
+
+        } else if (response.statusCode === 200) {
+            renderHomepage(req, res, body);
+
+        } else {
+            console.log('status', response.statusCode);
+        }
+    })
 }
 
 /**
