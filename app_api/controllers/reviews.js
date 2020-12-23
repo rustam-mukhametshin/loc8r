@@ -12,12 +12,86 @@ const reviewsDeleteOne = (req, res) => {
 };
 
 /**
+ * Update review
  *
  * @param req
+ * @param req.params.locationId
+ * @param req.params.reviewId
+ * @param req.body
  * @param res
  */
 const reviewsUpdateOne = (req, res) => {
+    const locationId = req.params.locationId;
+    const reviewId = req.params.reviewId;
+    const body = req.body;
 
+    if (!locationId || !reviewId) {
+        return res
+            .status(404)
+            .json({
+                message: 'Not found, locationId and reviewId are both required'
+            });
+    }
+
+    Loc
+        .findById(locationId)
+        .select('reviews')
+        .exec((err, loc) => {
+
+            if (!loc) {
+                return res
+                    .status(404)
+                    .json({
+                        message: 'Location not found'
+                    })
+
+            } else if (err) {
+                return res
+                    .status(404)
+                    .json(err)
+            }
+
+            if (loc.reviews && loc.reviews.length > 0) {
+                const thisReview = loc.reviews.id(reviewId);
+
+                if (!thisReview) {
+
+                    return res
+                        .status(404)
+                        .json({
+                            message: 'Review not found'
+                        });
+
+                } else {
+
+                    thisReview.author = body.author;
+                    thisReview.rating = body.rating;
+                    thisReview.reviewText = body.reviewText;
+
+                    loc
+                        .save((err, loc) => {
+
+                            if (err) {
+                                return res
+                                    .status(404)
+                                    .json(err);
+                            }
+
+                            updateAverageRating(loc._id);
+
+                            return res
+                                .status(200)
+                                .json(thisReview);
+                        });
+                }
+            } else {
+                res
+                    .status(404)
+                    .json({
+                        message: 'No reviews found'
+                    });
+            }
+        })
 };
 
 /**
