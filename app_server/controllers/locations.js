@@ -34,7 +34,14 @@ const homelist = function (req, res) {
             console.log('error', err);
 
         } else if (response.statusCode === 200) {
-            renderHomepage(req, res, body);
+            let data;
+
+            data = body.map((item) => {
+                item.distance = formatDistance(item.distance);
+                return item;
+            });
+
+            renderHomepage(req, res, data);
 
         } else {
             console.log('status', response.statusCode);
