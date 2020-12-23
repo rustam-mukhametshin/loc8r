@@ -34,7 +34,7 @@ const homelist = function (req, res) {
             console.log('error', err);
 
         } else if (response.statusCode === 200) {
-            let data;
+            let data = [];
 
             data = body.map((item) => {
                 item.distance = formatDistance(item.distance);
