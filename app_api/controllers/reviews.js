@@ -3,12 +3,84 @@ const mongoose = require('mongoose');
 const Loc = mongoose.model('Location');
 
 /**
+ * Delete review
  *
  * @param req
+ * @param req.params.locationId
+ * @param req.params.reviewId
  * @param res
  */
 const reviewsDeleteOne = (req, res) => {
+    const locationId = req.params.locationId;
+    const reviewId = req.params.reviewId;
 
+    if (!locationId || !reviewId) {
+        return res
+            .status(404)
+            .json({
+                message: 'Not found, locationId and reviewId are both required'
+            });
+    }
+
+    Loc
+        .findById(locationId)
+        .select('reviews')
+        .exec((err, loc) => {
+
+            if (!loc) {
+                return res
+                    .status(404)
+                    .json({
+                        message: 'Location not found'
+                    })
+
+            } else if (err) {
+                return res
+                    .status(404)
+                    .json(err)
+            }
+
+            if (loc.reviews && loc.reviews.length > 0) {
+                const thisReview = loc.reviews.id(reviewId);
+
+                if (!thisReview) {
+
+                    return res
+                        .status(404)
+                        .json({
+                            message: 'Review not found'
+                        });
+
+                } else {
+
+                    loc.reviews
+                        .id(reviewId)
+                        .remove();
+
+                    loc
+                        .save((err, loc) => {
+
+                            if (err) {
+                                return res
+                                    .status(404)
+                                    .json(err);
+                            }
+
+                            updateAverageRating(loc._id);
+
+                            return res
+                                .status(204)
+                                .json(null);
+                        });
+                }
+            } else {
+                res
+                    .status(404)
+                    .json({
+                        message: 'No reviews found'
+                    });
+            }
+        })
 };
 
 /**
