@@ -103,6 +103,25 @@ const addReview = function (req, res) {
     });
 }
 
+/**
+ * Format distance
+ *
+ * @param distance
+ * @returns {string}
+ */
+const formatDistance = (distance) => {
+    let thisDistance = 0;
+    let unit = 'm';
+
+    if (distance > 1000) {
+        thisDistance = parseFloat(distance / 1000).toFixed(1);
+        unit = 'km';
+    } else {
+        thisDistance = Math.floor(distance);
+    }
+    return thisDistance + unit;
+}
+
 
 module.exports = {
     homelist,
