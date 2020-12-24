@@ -49,6 +49,60 @@ const homelist = function (req, res) {
  * @param res
  */
 const locationInfo = function (req, res) {
+    renderDetailPage(req, res);
+}
+
+/**
+ * Get 'Add review' page
+ * @param req
+ * @param res
+ */
+const addReview = function (req, res) {
+    res.render('location-review-form', {
+        title: 'Add review',
+        pageHeader: {title: 'Review Starcups'}
+    });
+}
+
+/**
+ * Render homepage
+ *
+ * @param req
+ * @param res
+ * @param responseBody
+ */
+const renderHomepage = (req, res, responseBody) => {
+    let message = null;
+
+    if (!(responseBody instanceof Array)) {
+        message = 'API lookup error';
+        responseBody = [];
+    } else {
+        if (!responseBody.length) {
+            message = 'No place found nearby';
+        }
+    }
+
+    res.render('locations-list', {
+        title: 'Loc8r - find a palce to work with wifi',
+        description: 'Looking for wifi and a seat? Loc8r helps you find places to work when out and about.',
+        pageHeader: {
+            title: 'Loc8r',
+            strapline: 'Find places to work with wifi near you!'
+        },
+        sidebar: "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.",
+        locations: responseBody,
+        message
+    })
+}
+
+/**
+ * Render location detail
+ *
+ * @param req
+ * @param res
+ */
+const renderDetailPage = (req, res) => {
     res.render('location-info', {
         title: 'Starcups',
         pageHeader: {
@@ -98,50 +152,6 @@ const locationInfo = function (req, res) {
             ]
         }
     });
-}
-
-/**
- * Get 'Add review' page
- * @param req
- * @param res
- */
-const addReview = function (req, res) {
-    res.render('location-review-form', {
-        title: 'Add review',
-        pageHeader: {title: 'Review Starcups'}
-    });
-}
-
-/**
- * Render homepage
- *
- * @param req
- * @param res
- * @param responseBody
- */
-const renderHomepage = (req, res, responseBody) => {
-    let message = null;
-
-    if (!(responseBody instanceof Array)) {
-        message = 'API lookup error';
-        responseBody = [];
-    } else {
-        if (!responseBody.length) {
-            message = 'No place found nearby';
-        }
-    }
-
-    res.render('locations-list', {
-        title: 'Loc8r - find a palce to work with wifi',
-        description: 'Looking for wifi and a seat? Loc8r helps you find places to work when out and about.',
-        pageHeader: {
-            title: 'Loc8r',
-            strapline: 'Find places to work with wifi near you!'
-        },
-        sidebar: "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.",
-        locations: responseBody,
-        message
-    })
 }
 
 /**
