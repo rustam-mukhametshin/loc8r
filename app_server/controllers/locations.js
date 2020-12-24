@@ -60,7 +60,8 @@ const locationInfo = function (req, res) {
     request(
         requestOptions,
         (err, response, body) => {
-            renderDetailPage(req, res);
+
+            renderDetailPage(req, res, body);
         })
 }
 
@@ -113,8 +114,9 @@ const renderHomepage = (req, res, responseBody) => {
  *
  * @param req
  * @param res
+ * @param location
  */
-const renderDetailPage = (req, res) => {
+const renderDetailPage = (req, res, location) => {
     res.render('location-info', {
         title: 'Starcups',
         pageHeader: {
@@ -124,45 +126,7 @@ const renderDetailPage = (req, res) => {
             context: 'is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.',
             callToAction: 'If you\'ve been and you like it - or if you don\'t - please leave a review to help other people just like you.'
         },
-        location: {
-            name: 'Starcups',
-            address: '125 High Street, Reading, RG6 1PS',
-            rating: 3,
-            facilities: ['Hot drinks', 'Food', 'Premium wifi'],
-            coords: {lat: 51.455041, lng: -0.9690884},
-            openingTimes: [
-                {
-                    days: 'Monday - Friday',
-                    opening: '7:00am',
-                    closing: '7:00pm',
-                    closed: false
-                },
-                {
-                    days: 'Saturday',
-                    opening: '8:00am',
-                    closing: '5:00pm',
-                    closed: false
-                },
-                {
-                    days: 'Sunday',
-                    closed: true
-                }
-            ],
-            reviews: [
-                {
-                    author: 'Simon Holmes',
-                    rating: 3,
-                    reviewText: 'What a great place.',
-                    timestamp: '16 March 2020'
-                },
-                {
-                    author: 'Charlie Chaplin',
-                    rating: 4,
-                    reviewText: "It was okay. Coffee wasn't great.",
-                    timestamp: '14 February 2020'
-                }
-            ]
-        }
+        location
     });
 }
 
