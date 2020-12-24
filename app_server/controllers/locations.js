@@ -125,9 +125,9 @@ const renderHomepage = (req, res, responseBody) => {
  */
 const renderDetailPage = (req, res, location) => {
     res.render('location-info', {
-        title: 'Starcups',
+        title: location.name,
         pageHeader: {
-            title: 'Loc8r'
+            title: location.name
         },
         sidebar: {
             context: 'is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.',
