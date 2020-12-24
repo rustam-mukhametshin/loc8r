@@ -49,7 +49,19 @@ const homelist = function (req, res) {
  * @param res
  */
 const locationInfo = function (req, res) {
-    renderDetailPage(req, res);
+    const path = `/api/locations/${req.params.locationId}`;
+
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,
+        method: 'GET',
+        json: {}
+    }
+
+    request(
+        requestOptions,
+        (err, response, body) => {
+            renderDetailPage(req, res);
+        })
 }
 
 /**
