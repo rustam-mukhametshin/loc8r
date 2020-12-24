@@ -61,7 +61,14 @@ const locationInfo = function (req, res) {
         requestOptions,
         (err, response, body) => {
 
-            renderDetailPage(req, res, body);
+            const data = body;
+
+            data.coords = {
+                lng: body.coords[0],
+                lat: body.coords[1]
+            }
+
+            renderDetailPage(req, res, data);
         })
 }
 
