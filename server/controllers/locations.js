@@ -97,7 +97,11 @@ const locationInfo = function (req, res) {
  * @param res
  */
 const addReview = function (req, res) {
-    renderReviewForm(req, res);
+    getLocationInfo(
+        req,
+        res,
+        (req, res, responseData) => renderReviewForm(req, res, responseData)
+    )
 }
 
 /**
