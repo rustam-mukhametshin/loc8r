@@ -44,6 +44,35 @@ const homelist = function (req, res) {
 }
 
 /**
+ * Catch errors
+ *
+ * @param req
+ * @param res
+ * @param status
+ */
+function showError(req, res, status) {
+    let title = '';
+    let content = '';
+
+    if (status === 404) {
+        title = '404, page not found';
+        content = 'Oh dear. Looks like you cann\'t find this page. Sorry.';
+
+    } else {
+        title = `${status}, something's gone wrong.`;
+        content = 'Something, somewhere, has gone just a little bit wrong';
+    }
+
+    res
+        .status(status);
+
+    res.render('generic-text', {
+        title,
+        content
+    })
+}
+
+/**
  * Get 'Location info' page
  * @param req
  * @param res
@@ -59,17 +88,19 @@ const locationInfo = function (req, res) {
 
     request(
         requestOptions,
-        (err, response, body) => {
+        (err, {statusCode}, body) => {
 
             let data = body;
 
-            if (response.statusCode === 200) {
+            if (statusCode === 200) {
                 data.coords = {
                     lng: body.coords[0],
                     lat: body.coords[1]
                 }
 
                 renderDetailPage(req, res, data);
+            } else {
+                showError(req, res, statusCode);
             }
         })
 }
