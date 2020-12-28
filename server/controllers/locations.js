@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'production') {
  * @param req
  * @param res
  */
-const homelist = function (req, res) {
+const homelistAction = function (req, res) {
     const path = '/api/locations';
 
     const requestOptions = {
@@ -49,7 +49,7 @@ const homelist = function (req, res) {
  * @param req
  * @param res
  */
-const locationInfo = function (req, res) {
+const locationInfoAction = function (req, res) {
 
     getLocationInfo(
         req,
@@ -68,7 +68,7 @@ const locationInfo = function (req, res) {
  * @param req
  * @param res
  */
-const addReview = function (req, res) {
+const addReviewAction = function (req, res) {
     getLocationInfo(
         req,
         res,
@@ -201,14 +201,14 @@ const getLocationInfo = (req, res, callback) => {
 /**
  * Add review
  */
-const doAddReview = (req, res) => {
+const doAddReviewAction = (req, res) => {
 
 }
 
 
 module.exports = {
-    homelist,
-    locationInfo,
-    addReview,
-    doAddReview
+    homelistAction,
+    locationInfoAction,
+    addReviewAction,
+    doAddReviewAction
 };

@@ -4,14 +4,14 @@ const ctrlLocations = require('../controllers/locations');
 const ctrlOthers = require('../controllers/others');
 
 /* Locations pages */
-router.get('/', ctrlLocations.homelist);
+router.get('/', ctrlLocations.homelistAction);
 
-router.get('/location/:locationId', ctrlLocations.locationInfo);
+router.get('/location/:locationId', ctrlLocations.locationInfoAction);
 
 router
     .route('/location/:locationId/review/new')
-    .get(ctrlLocations.addReview)
-    .post(ctrlLocations.doAddReview)
+    .get(ctrlLocations.addReviewAction)
+    .post(ctrlLocations.doAddReviewAction)
 ;
 
 /* Others pages */
