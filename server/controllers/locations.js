@@ -162,11 +162,12 @@ const renderDetailPage = (req, res, location) => {
  *
  * @param req
  * @param res
+ * @param responseData
  */
-const renderReviewForm = (req, res) => {
+const renderReviewForm = (req, res, {name}) => {
     res.render('location-review-form', {
-        title: 'Review Starcups on Loc8r',
-        pageHeader: {title: 'Review Starcups'}
+        title: `Review ${name} on Loc8r`,
+        pageHeader: {title: `Review ${name}`}
     })
 }
 
