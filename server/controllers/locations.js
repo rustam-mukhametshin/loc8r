@@ -78,31 +78,16 @@ function showError(req, res, status) {
  * @param res
  */
 const locationInfo = function (req, res) {
-    const path = `/api/locations/${req.params.locationId}`;
 
-    const requestOptions = {
-        url: `${apiOptions.server}${path}`,
-        method: 'GET',
-        json: {}
-    }
-
-    request(
-        requestOptions,
-        (err, {statusCode}, body) => {
-
-            let data = body;
-
-            if (statusCode === 200) {
-                data.coords = {
-                    lng: body.coords[0],
-                    lat: body.coords[1]
-                }
-
-                renderDetailPage(req, res, data);
-            } else {
-                showError(req, res, statusCode);
-            }
-        })
+    getLocationInfo(
+        req,
+        res,
+        (
+            req,
+            res,
+            responseData
+        ) => renderDetailPage(req, res, responseData)
+    );
 }
 
 /**
@@ -198,6 +183,42 @@ const formatDistance = (distance) => {
         thisDistance = Math.floor(distance);
     }
     return thisDistance + unit;
+}
+
+/**
+ * Get location info
+ *
+ * @param req
+ * @param res
+ * @param callback
+ */
+const getLocationInfo = (req, res, callback) => {
+
+    const path = `/api/locations/${req.params.locationId}`;
+
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,
+        method: 'GET',
+        json: {}
+    }
+
+    request(
+        requestOptions,
+        (err, {statusCode}, body) => {
+
+            let data = body;
+
+            if (statusCode === 200) {
+                data.coords = {
+                    lng: body.coords[0],
+                    lat: body.coords[1]
+                }
+
+                callback(req, res, data);
+            } else {
+                showError(req, res, statusCode);
+            }
+        })
 }
 
 /**
