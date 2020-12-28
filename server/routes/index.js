@@ -5,8 +5,12 @@ const ctrlOthers = require('../controllers/others');
 
 /* Locations pages */
 router.get('/', ctrlLocations.homelist);
+
 router.get('/location/:locationId', ctrlLocations.locationInfo);
-router.get('/location/review/new', ctrlLocations.addReview);
+
+router
+    .route('/location/:locationId/review/new')
+    .get(ctrlLocations.addReview);
 
 /* Others pages */
 router.get('/about', ctrlOthers.about);
