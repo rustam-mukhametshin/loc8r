@@ -189,9 +189,17 @@ const formatDistance = (distance) => {
     return thisDistance + unit;
 }
 
+/**
+ * Add review
+ */
+const doAddReview = (req, res) => {
+
+}
+
 
 module.exports = {
     homelist,
     locationInfo,
-    addReview
+    addReview,
+    doAddReview
 };
