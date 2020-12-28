@@ -107,14 +107,12 @@ const locationInfo = function (req, res) {
 
 /**
  * Get 'Add review' page
+ *
  * @param req
  * @param res
  */
 const addReview = function (req, res) {
-    res.render('location-review-form', {
-        title: 'Add review',
-        pageHeader: {title: 'Review Starcups'}
-    });
+    renderReviewForm(req, res);
 }
 
 /**
@@ -168,6 +166,19 @@ const renderDetailPage = (req, res, location) => {
         },
         location
     });
+}
+
+/**
+ * Render review form
+ *
+ * @param req
+ * @param res
+ */
+const renderReviewForm = (req, res) => {
+    res.render('location-review-form', {
+        title: 'Review Starcups on Loc8r',
+        pageHeader: {title: 'Review Starcups'}
+    })
 }
 
 /**
