@@ -1,4 +1,5 @@
 const request = require('request');
+const {showError} = require('./base');
 
 // Todo: move to external
 const apiOptions = {
@@ -40,35 +41,6 @@ const homelist = function (req, res) {
         }
 
         renderHomepage(req, res, data);
-    })
-}
-
-/**
- * Catch errors
- *
- * @param req
- * @param res
- * @param status
- */
-function showError(req, res, status) {
-    let title = '';
-    let content = '';
-
-    if (status === 404) {
-        title = '404, page not found';
-        content = 'Oh dear. Looks like you cann\'t find this page. Sorry.';
-
-    } else {
-        title = `${status}, something's gone wrong.`;
-        content = 'Something, somewhere, has gone just a little bit wrong';
-    }
-
-    res
-        .status(status);
-
-    res.render('generic-text', {
-        title,
-        content
     })
 }
 
