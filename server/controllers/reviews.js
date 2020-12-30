@@ -42,6 +42,9 @@ const doAddReviewAction = (req, res) => {
             method: 'POST',
             json: postData
         }
+        if (!postData.author || !postData.rating || !postData.reviewText) {
+            res.redirect(`/location/${locationId}/review/new?err=val`);
+        }
 
         request(requestOptions, (err, {statusCode}, body) => {
             if (statusCode === 201) {
