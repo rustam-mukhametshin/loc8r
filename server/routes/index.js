@@ -11,7 +11,7 @@ router.get('/location/:locationId', ctrlLocations.locationInfoAction);
 
 router
     .route('/location/:locationId/review/new')
-    .get(ctrlLocations.addReviewAction)
+    .get(ctrlReviews.addReviewAction)
     .post(ctrlReviews.doAddReviewAction)
 ;
 

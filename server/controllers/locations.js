@@ -53,20 +53,6 @@ const locationInfoAction = function (req, res) {
 }
 
 /**
- * Get 'Add review' page
- *
- * @param req
- * @param res
- */
-const addReviewAction = function (req, res) {
-    getLocationInfo(
-        req,
-        res,
-        (req, res, responseData) => renderReviewForm(req, res, responseData)
-    )
-}
-
-/**
  * Render homepage
  *
  * @param req
@@ -117,20 +103,6 @@ const renderDetailPage = (req, res, location) => {
         },
         location
     });
-}
-
-/**
- * Render review form
- *
- * @param req
- * @param res
- * @param responseData
- */
-const renderReviewForm = (req, res, {name}) => {
-    res.render('location-review-form', {
-        title: `Review ${name} on Loc8r`,
-        pageHeader: {title: `Review ${name}`}
-    })
 }
 
 /**
@@ -191,5 +163,5 @@ const getLocationInfo = (req, res, callback) => {
 module.exports = {
     homelistAction,
     locationInfoAction,
-    addReviewAction
+    getLocationInfo
 };

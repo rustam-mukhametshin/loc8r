@@ -1,5 +1,20 @@
 const request = require('request');
 const {showError, apiOptions} = require('./base');
+const ctrlLocations = require('../controllers/locations');
+
+/**
+ * Get 'Add review' page
+ *
+ * @param req
+ * @param res
+ */
+const addReviewAction = function (req, res) {
+    ctrlLocations.getLocationInfo(
+        req,
+        res,
+        (req, res, responseData) => renderReviewForm(req, res, responseData)
+    )
+}
 
 /**
  * Add review
@@ -39,6 +54,21 @@ const doAddReviewAction = (req, res) => {
 
 }
 
+/**
+ * Render review form
+ *
+ * @param req
+ * @param res
+ * @param responseData
+ */
+const renderReviewForm = (req, res, {name}) => {
+    res.render('location-review-form', {
+        title: `Review ${name} on Loc8r`,
+        pageHeader: {title: `Review ${name}`}
+    })
+}
+
 module.exports = {
-    doAddReviewAction
+    doAddReviewAction,
+    addReviewAction
 };
