@@ -46,10 +46,15 @@ const doAddReviewAction = (req, res) => {
             res.redirect(`/location/${locationId}/review/new?err=val`);
         }
 
-        request(requestOptions, (err, {statusCode}, body) => {
+        request(requestOptions, (err, {statusCode}, {name}) => {
             if (statusCode === 201) {
                 res.redirect(`/location/${locationId}`);
+
+            // Todo: Check all error objects
+            } else if (statusCode === 400 && name && name === 'Location validation failed') {
+                res.redirect(`/location/${locationId}/review/new?err=val`);
             } else {
+                console.log(body);
                 showError(req, res, statusCode);
             }
         })
