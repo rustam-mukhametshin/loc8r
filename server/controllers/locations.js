@@ -1,15 +1,5 @@
 const request = require('request');
-const {showError} = require('./base');
-
-// Todo: move to external
-const apiOptions = {
-    server: 'http://localhost:3000'
-};
-
-if (process.env.NODE_ENV === 'production') {
-    apiOptions.server = 'https://someApp.herokuapp.com';
-}
-
+const {showError, apiOptions} = require('./base');
 
 /**
  * Get 'home' page

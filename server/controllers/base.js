@@ -1,3 +1,12 @@
+
+const apiOptions = {
+    server: 'http://localhost:3000'
+};
+
+if (process.env.NODE_ENV === 'production') {
+    apiOptions.server = 'https://someApp.herokuapp.com';
+}
+
 /**
  * Catch errors
  *
@@ -29,5 +38,6 @@ function showError(req, res, status) {
 
 
 module.exports = {
-    showError
+    showError,
+    apiOptions
 };
