@@ -44,20 +44,20 @@ const doAddReviewAction = (req, res) => {
         }
         if (!postData.author || !postData.rating || !postData.reviewText) {
             res.redirect(`/location/${locationId}/review/new?err=val`);
+        } else {
+            request(requestOptions, (err, {statusCode}, {name}) => {
+                if (statusCode === 201) {
+                    res.redirect(`/location/${locationId}`);
+
+                    // Todo: Check all error objects
+                } else if (statusCode === 400 && name && name === 'Location validation failed') {
+                    res.redirect(`/location/${locationId}/review/new?err=val`);
+                } else {
+                    console.log(body);
+                    showError(req, res, statusCode);
+                }
+            });
         }
-
-        request(requestOptions, (err, {statusCode}, {name}) => {
-            if (statusCode === 201) {
-                res.redirect(`/location/${locationId}`);
-
-            // Todo: Check all error objects
-            } else if (statusCode === 400 && name && name === 'Location validation failed') {
-                res.redirect(`/location/${locationId}/review/new?err=val`);
-            } else {
-                console.log(body);
-                showError(req, res, statusCode);
-            }
-        })
     }
 
 }
