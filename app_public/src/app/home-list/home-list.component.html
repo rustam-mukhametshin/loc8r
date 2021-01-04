@@ -2,12 +2,12 @@
   <div class="card-block">
     <h4>
       <a href="/location/{{location._id}}">{{location.name}}</a>
-      <small>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="far fa-star"></i>
-        <i class="far fa-star"></i>
+      <small>&nbsp;
+        <i class="fa{{ location.rating < 1 ? 'r' : 's' }} fa-star"></i>
+        <i class="fa{{ location.rating < 2 ? 'r' : 's' }} fa-star"></i>
+        <i class="fa{{ location.rating < 3 ? 'r' : 's' }} fa-star"></i>
+        <i class="fa{{ location.rating < 4 ? 'r' : 's' }} fa-star"></i>
+        <i class="fa{{ location.rating < 5 ? 'r' : 's' }} fa-star"></i>
       </small>
       <span class="badge badge-pill badge-default float-right">{{location.distance}}km</span>
     </h4>
