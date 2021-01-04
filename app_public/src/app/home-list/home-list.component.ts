@@ -8,7 +8,17 @@ import { Location } from '../../models/Location';
 })
 export class HomeListComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
+
+  location: Location = {
+    _id: '5fd23c71c2ac5f0b3c7c7a31',
+    name: 'Costy',
+    distance: 14.0,
+    address: 'High Street, Reading',
+    rating: 3,
+    facilities: ['hot drinks', 'food', 'power']
+  };
 
   ngOnInit(): void {
   }
