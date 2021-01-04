@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '../../models/Location';
 
 @Component({
   selector: 'app-home-list',
