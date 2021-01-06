@@ -5,13 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DistancePipe implements PipeTransform {
 
+  /**
+   * Convert distance to readable format
+   */
   transform(distance: number): string {
 
-    const isNumeric = (n) => {
-      return !isNaN(parseFloat(n)) && isFinite(n);
-    };
-
-    if (distance && isNumeric(distance)) {
+    if (distance && this.isNumeric(distance)) {
       let thisDistance = '0';
       let unit = 'm';
 
@@ -32,5 +31,12 @@ export class DistancePipe implements PipeTransform {
     }
 
     return '?';
+  }
+
+  /**
+   * Check if its numeric
+   */
+  private isNumeric = (n) => {
+    return !isNaN(parseFloat(n)) && isFinite(n);
   }
 }
