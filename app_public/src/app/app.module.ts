@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HomeListComponent } from './home-list/home-list.component';
 import { DistancePipe } from './pipes/distance.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -12,7 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      {path: '', component: HomeListComponent},
+    ])
   ],
   providers: [],
   bootstrap: [
