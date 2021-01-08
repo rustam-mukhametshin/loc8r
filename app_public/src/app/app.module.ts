@@ -20,7 +20,7 @@ import { AboutComponent } from './about/about.component';
     HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: HomeListComponent},
-      {path: '', component: AboutComponent},
+      {path: 'about', component: AboutComponent},
     ])
   ],
   providers: [],
