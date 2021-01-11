@@ -9,6 +9,7 @@ import { AboutComponent } from './views/about/about.component';
 import { HomepageComponent } from './views/homepage/homepage.component';
 import { PageHeaderComponent } from './views/page-header/page-header.component';
 import { SidebarComponent } from './views/sidebar/sidebar.component';
+import { HtmlLineBreaksPipe } from './pipes/html-line-breaks.pipe';
 
 const layout = [
   FrameworkComponent,
@@ -17,6 +18,7 @@ const layout = [
 
 const pipes = [
   DistancePipe,
+  HtmlLineBreaksPipe,
 ];
 
 const components = [
