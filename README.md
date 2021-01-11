@@ -8,6 +8,8 @@ Find places to work with wifi near you!
 - NodeJs + ExpressJs
 - MongoDB
 - HTML5 geolocation
+- Pug (View in ExpressJs)
+- Scss
 
 ## Installation
 
