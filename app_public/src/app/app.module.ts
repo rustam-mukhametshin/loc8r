@@ -8,6 +8,7 @@ import { FrameworkComponent } from './views/framework/framework.component';
 import { AboutComponent } from './about/about.component';
 import { HomepageComponent } from './views/homepage/homepage.component';
 import { PageHeaderComponent } from './views/page-header/page-header.component';
+import { SidebarComponent } from './views/sidebar/sidebar.component';
 
 const layout = [
   FrameworkComponent,
@@ -22,13 +23,14 @@ const components = [
   HomeListComponent,
   AboutComponent,
   HomepageComponent,
+  SidebarComponent
 ];
 
 @NgModule({
   declarations: [
     ...pipes,
     ...components,
-    ...layout
+    ...layout,
   ],
   imports: [
     BrowserModule,
