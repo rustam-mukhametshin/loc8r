@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
+
+  /**
+   * Page content
+   */
+  public pageContent = {
+    header: {
+      title: 'Loc8r',
+      strapline: 'Find places to work with wifi near you!'
+    }
+  };
 
   ngOnInit(): void {
   }
-
 }
