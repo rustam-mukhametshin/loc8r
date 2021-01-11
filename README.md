@@ -46,8 +46,8 @@ Find places to work with wifi near you!
 3. Open Browsers
 
 - For angular `http://localhost:4200/`
-- For express `http://localhost:4200/`
-- API connection `http://localhost:4200/api/`
+- For express `http://localhost:3000/`
+- API connection `http://localhost:3000/api/`
 
 ---
 
