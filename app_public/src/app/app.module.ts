@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { FrameworkComponent } from './views/framework/framework.component';
 import { AboutComponent } from './about/about.component';
 import { HomepageComponent } from './views/homepage/homepage.component';
+import { PageHeaderComponent } from './views/page-header/page-header.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { HomepageComponent } from './views/homepage/homepage.component';
     DistancePipe,
     FrameworkComponent,
     AboutComponent,
-    HomepageComponent
+    HomepageComponent,
+    PageHeaderComponent
   ],
   imports: [
     BrowserModule,
