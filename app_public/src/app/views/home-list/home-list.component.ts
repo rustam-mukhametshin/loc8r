@@ -10,6 +10,8 @@ import { DataService } from '../../services/data.service';
 export class HomeListComponent implements OnInit {
   public locations: Location[];
 
+  public message: string;
+
   constructor(private dataService: DataService) {
     this.dataService = dataService;
   }
