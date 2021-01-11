@@ -49,4 +49,14 @@ export class HomeListComponent implements OnInit {
   private showError(error: any): void {
     this.message = error.message;
   }
+
+
+  /**
+   * Not supported geolocation
+   *
+   * @private
+   */
+  private noGeo(): void {
+    this.message = 'Geolocation not supported by this browser';
+  }
 }
