@@ -26,9 +26,17 @@ export class HomeListComponent implements OnInit {
    * @private
    */
   private getLocations(): void {
+
+    this.message = 'Searching for nearby places';
+
     this.dataService
       .getLocation()
-      .then(response => this.locations = response)
+      .then(foundLocation => {
+
+        this.message = foundLocation.length > 0 ? '' : 'No locations found';
+
+        this.locations = foundLocation;
+      })
     ;
   }
 
