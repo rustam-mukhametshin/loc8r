@@ -74,9 +74,9 @@ export class HomeListComponent implements OnInit {
     this.message = 'Getting you location ...';
 
     this.geolocationService.getPosition(
-      this.getLocations,
-      this.showError,
-      this.noGeo
+      this.getLocations.bind(this),
+      this.showError.bind(this),
+      this.noGeo.bind(this)
     );
   }
 }
