@@ -16,9 +16,7 @@ export class DataService {
   /**
    * Get location
    */
-  public getLocation(): Promise<Location[]> {
-    const lng = -0.7992599;
-    const lat = 51.378091;
+  public getLocation(lat: number, lng: number): Promise<Location[]> {
     const maxDistance = 20;
 
     const url = `${this.apiBaseUrl}/locations?lng=${lng}&lat=${lat}&maxDistance=${maxDistance}`;
