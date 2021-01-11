@@ -5,7 +5,7 @@ import { DistancePipe } from './pipes/distance.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FrameworkComponent } from './views/framework/framework.component';
-import { AboutComponent } from './about/about.component';
+import { AboutComponent } from './views/about/about.component';
 import { HomepageComponent } from './views/homepage/homepage.component';
 import { PageHeaderComponent } from './views/page-header/page-header.component';
 import { SidebarComponent } from './views/sidebar/sidebar.component';
