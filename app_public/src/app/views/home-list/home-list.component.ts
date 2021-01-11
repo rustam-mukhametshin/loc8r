@@ -30,9 +30,12 @@ export class HomeListComponent implements OnInit {
    *
    * @private
    */
-  private getLocations(): void {
+  private getLocations(position: Position): void {
 
     this.message = 'Searching for nearby places';
+
+    const lat: number = position.coords.latitude;
+    const lng: number = position.coords.longitude;
 
     this.dataService
       .getLocation()
