@@ -9,15 +9,26 @@ import { AboutComponent } from './about/about.component';
 import { HomepageComponent } from './views/homepage/homepage.component';
 import { PageHeaderComponent } from './views/page-header/page-header.component';
 
+const layout = [
+  FrameworkComponent,
+  PageHeaderComponent,
+];
+
+const pipes = [
+  DistancePipe,
+];
+
+const components = [
+  HomeListComponent,
+  AboutComponent,
+  HomepageComponent,
+];
 
 @NgModule({
   declarations: [
-    HomeListComponent,
-    DistancePipe,
-    FrameworkComponent,
-    AboutComponent,
-    HomepageComponent,
-    PageHeaderComponent
+    ...pipes,
+    ...components,
+    ...layout
   ],
   imports: [
     BrowserModule,
