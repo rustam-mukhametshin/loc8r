@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '../../models/Location';
 import { DataService } from '../../services/data.service';
+import { GeolocationService } from '../../services/geolocation.service';
 
 @Component({
   selector: 'app-home-list',
@@ -12,12 +13,16 @@ export class HomeListComponent implements OnInit {
 
   public message: string;
 
-  constructor(private dataService: DataService) {
+  constructor(
+    private dataService: DataService,
+    private geolocationService: GeolocationService
+  ) {
     this.dataService = dataService;
+    this.geolocationService = geolocationService;
   }
 
   ngOnInit(): void {
-    this.getLocations();
+    this.getPosition();
   }
 
   /**
@@ -58,5 +63,20 @@ export class HomeListComponent implements OnInit {
    */
   private noGeo(): void {
     this.message = 'Geolocation not supported by this browser';
+  }
+
+  /**
+   * Get locations base on geo position
+   *
+   * @private
+   */
+  private getPosition(): void {
+    this.message = 'Getting you location ...';
+
+    this.geolocationService.getPosition(
+      this.getLocations,
+      this.showError,
+      this.noGeo
+    );
   }
 }
