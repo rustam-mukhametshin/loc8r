@@ -32,4 +32,13 @@ export class HomeListComponent implements OnInit {
     ;
   }
 
+  /**
+   * Any errors
+   *
+   * @param error
+   * @private
+   */
+  private showError(error: any): void {
+    this.message = error.message;
+  }
 }
