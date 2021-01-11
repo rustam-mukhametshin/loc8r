@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FrameworkComponent } from './views/framework/framework.component';
 import { AboutComponent } from './about/about.component';
+import { HomepageComponent } from './views/homepage/homepage.component';
 
 
 @NgModule({
@@ -13,13 +14,14 @@ import { AboutComponent } from './about/about.component';
     HomeListComponent,
     DistancePipe,
     FrameworkComponent,
-    AboutComponent
+    AboutComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {path: '', component: HomeListComponent},
+      {path: '', component: HomepageComponent},
       {path: 'about', component: AboutComponent},
     ])
   ],
