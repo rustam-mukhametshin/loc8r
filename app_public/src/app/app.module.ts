@@ -10,6 +10,7 @@ import { HomepageComponent } from './views/homepage/homepage.component';
 import { PageHeaderComponent } from './views/page-header/page-header.component';
 import { SidebarComponent } from './views/sidebar/sidebar.component';
 import { HtmlLineBreaksPipe } from './pipes/html-line-breaks.pipe';
+import { RatingStarsComponent } from './views/rating-stars/rating-stars.component';
 
 const layout = [
   FrameworkComponent,
@@ -25,7 +26,8 @@ const components = [
   HomeListComponent,
   AboutComponent,
   HomepageComponent,
-  SidebarComponent
+  SidebarComponent,
+  RatingStarsComponent,
 ];
 
 @NgModule({
