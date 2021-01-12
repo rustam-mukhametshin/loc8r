@@ -3,7 +3,7 @@
 <div class="row">
 
   <div class="col-12 col-lg-8">
-    <app-location-details [location]="location"></app-location-details>
+    <app-location-details *ngIf="location" [location]="location"></app-location-details>
   </div>
 
   <div class="col-12 col-lg-4">
