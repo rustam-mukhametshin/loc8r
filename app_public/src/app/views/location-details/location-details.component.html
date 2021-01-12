@@ -4,6 +4,22 @@
     <app-rating-stars [rating]="location.rating"></app-rating-stars>
 
     <p>{{location.address}}</p>
+    <div class="card card-primary">
+      <div class="card-block">
+
+        <h2 class="card-title">
+          Opening hours
+        </h2>
+
+          <p class="card-text" *ngFor="let time of location.openingTimes" [ngSwitch]="time.closed">
+            {{time.days}}: &nbsp;
+
+            <span *ngSwitchCase="time.closed">Closed</span>
+            <span *ngSwitchDefault>{{time.opening + " - " + time.closing}}</span>
+
+          </p>
+      </div>
+    </div>
 
     <div class="card card-primary">
       <div class="card-block">
