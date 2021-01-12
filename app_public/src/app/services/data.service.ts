@@ -30,6 +30,22 @@ export class DataService {
   }
 
   /**
+   * Get single location
+   *
+   * @param locationId
+   */
+  public getLocationById(locationId: string): Promise<Location> {
+
+    const url = `${this.apiBaseUrl}/locations/${locationId}`;
+
+    return this.http
+      .get(url)
+      .toPromise()
+      .then(response => response as Location)
+      .catch(this.handleError);
+  }
+
+  /**
    * Handle error
    * @param error
    * @private
