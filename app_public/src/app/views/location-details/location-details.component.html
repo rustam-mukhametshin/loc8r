@@ -27,3 +27,29 @@
     </div>
   </div>
 </div>
+<div class="row">
+  <div class="col-12">
+    <div class="card card-primary review-card">
+      <div class="card-block">
+
+        <a href="/location/{{location.id}}/review/new" class="btn btn-primary float-right">Add review</a>
+
+        <h2 class="card-title">Customer reviews</h2>
+
+        <div *ngFor="let review of location.reviews">
+
+          <div class="col-12 no-gutters review-header">
+            <app-rating-stars [rating]="review.rating"></app-rating-stars>
+            <span class="reviewAuthor">{{review.author}}</span>
+            <small class="reviewTimestamp">{{review.createdOn}}</small>
+          </div>
+
+          <div class="col-12">
+            <p [innerHTML]="review.reviewText | htmlLineBreaks"></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
