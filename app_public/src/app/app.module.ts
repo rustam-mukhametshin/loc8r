@@ -13,6 +13,7 @@ import { HtmlLineBreaksPipe } from './pipes/html-line-breaks.pipe';
 import { RatingStarsComponent } from './views/rating-stars/rating-stars.component';
 import { DetailsPageComponent } from './views/details-page/details-page.component';
 import { LocationDetailsComponent } from './views/location-details/location-details.component';
+import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
 
 const layout = [
   FrameworkComponent,
@@ -22,6 +23,7 @@ const layout = [
 const pipes = [
   DistancePipe,
   HtmlLineBreaksPipe,
+  MostRecentFirstPipe,
 ];
 
 const components = [
