@@ -11,6 +11,7 @@ import { PageHeaderComponent } from './views/page-header/page-header.component';
 import { SidebarComponent } from './views/sidebar/sidebar.component';
 import { HtmlLineBreaksPipe } from './pipes/html-line-breaks.pipe';
 import { RatingStarsComponent } from './views/rating-stars/rating-stars.component';
+import { DetailsPageComponent } from './views/details-page/details-page.component';
 
 const layout = [
   FrameworkComponent,
@@ -28,6 +29,7 @@ const components = [
   HomepageComponent,
   SidebarComponent,
   RatingStarsComponent,
+  DetailsPageComponent,
 ];
 
 @NgModule({
@@ -41,6 +43,7 @@ const components = [
     HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: HomepageComponent},
+      {path: 'location/:locationId', component: DetailsPageComponent},
       {path: 'about', component: AboutComponent},
     ])
   ],
