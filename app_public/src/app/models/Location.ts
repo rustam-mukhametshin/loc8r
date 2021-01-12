@@ -5,6 +5,18 @@ export class Location {
   address: string;
   rating: number;
   facilities: string[];
+  coords: {
+    coordinates: number[],
+  };
+  openingTimes: [
+    {
+      id: string;
+      closed: boolean;
+      closing: string;
+      days: string;
+      opening: string;
+    }
+  ];
   reviews: Review[];
 }
 
