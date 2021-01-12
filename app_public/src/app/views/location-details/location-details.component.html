@@ -52,7 +52,7 @@
 
         <h2 class="card-title">Customer reviews</h2>
 
-        <div *ngFor="let review of location.reviews">
+        <div *ngFor="let review of location.reviews | mostRecentFirst">
 
           <div class="col-12 no-gutters review-header">
             <app-rating-stars [rating]="review.rating"></app-rating-stars>
