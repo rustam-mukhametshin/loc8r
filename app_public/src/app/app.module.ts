@@ -12,6 +12,7 @@ import { SidebarComponent } from './views/sidebar/sidebar.component';
 import { HtmlLineBreaksPipe } from './pipes/html-line-breaks.pipe';
 import { RatingStarsComponent } from './views/rating-stars/rating-stars.component';
 import { DetailsPageComponent } from './views/details-page/details-page.component';
+import { LocationDetailsComponent } from './views/location-details/location-details.component';
 
 const layout = [
   FrameworkComponent,
@@ -30,6 +31,7 @@ const components = [
   SidebarComponent,
   RatingStarsComponent,
   DetailsPageComponent,
+  LocationDetailsComponent,
 ];
 
 @NgModule({

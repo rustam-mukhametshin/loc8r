@@ -43,6 +43,7 @@ export class DetailsPageComponent implements OnInit {
       .subscribe((newLocation: Location) => {
           this.pageContent.header.title = newLocation.name;
           this.pageContent.sidebar = `${newLocation.name} ${text}`;
+          this.location = newLocation;
         }
       );
   }
