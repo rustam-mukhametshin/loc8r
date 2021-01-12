@@ -5,5 +5,15 @@
 
     <p>{{location.address}}</p>
 
+    <div class="card card-primary">
+      <div class="card-block">
+        <h2 class="card-title">
+          Facilities
+        </h2>
+        <span class="badge badge-warning" *ngFor="let facility of location.facilities">
+        <i class="fa fa-check"></i>{{facility}}
+      </span>
+      </div>
+    </div>
   </div>
 </div>
