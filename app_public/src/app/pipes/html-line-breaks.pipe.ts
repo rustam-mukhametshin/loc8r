@@ -11,7 +11,7 @@ export class HtmlLineBreaksPipe implements PipeTransform {
    * @param value string
    */
   transform(value: string): string {
-    return value.replace('\n', '<br/>');
+    return value.replace(/\\n/g, '<br/>');
   }
 
 }
