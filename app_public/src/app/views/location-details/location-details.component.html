@@ -48,11 +48,11 @@
     <div class="card card-primary review-card">
       <div class="card-block">
 
-        <a href="/location/{{location.id}}/review/new" class="btn btn-primary float-right">Add review</a>
+        <button class="btn btn-primary float-right" (click)="formVisible=true">Add review</button>
 
         <h2 class="card-title">Customer reviews</h2>
 
-        <div>
+        <div *ngIf="formVisible">
           <form action="">
             <hr>
             <h4>Add your review</h4>
@@ -89,7 +89,7 @@
               <div class="col-12">
                 <button type="submit" class="btn btn-primary float-right" style="margin-left:15px">Submit review
                 </button>
-                <button class="btn btn-default float-right">Cancel</button>
+                <button class="btn btn-default float-right" (click)="formVisible=false">Cancel</button>
               </div>
             </div>
 

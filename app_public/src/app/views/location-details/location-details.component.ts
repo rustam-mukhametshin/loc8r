@@ -19,6 +19,8 @@ export class LocationDetailsComponent implements OnInit {
     reviewText: ''
   };
 
+  public formVisible = false;
+
   constructor() {
   }
 
