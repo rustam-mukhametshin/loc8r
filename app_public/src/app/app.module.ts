@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HomeListComponent } from './views/home-list/home-list.component';
 import { DistancePipe } from './pipes/distance.pipe';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 import { FrameworkComponent } from './views/framework/framework.component';
 import { AboutComponent } from './views/about/about.component';
 import { HomepageComponent } from './views/homepage/homepage.component';
@@ -15,6 +14,7 @@ import { DetailsPageComponent } from './views/details-page/details-page.componen
 import { LocationDetailsComponent } from './views/location-details/location-details.component';
 import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 const layout = [
   FrameworkComponent,
@@ -48,11 +48,7 @@ const components = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-      {path: '', component: HomepageComponent},
-      {path: 'location/:locationId', component: DetailsPageComponent},
-      {path: 'about', component: AboutComponent},
-    ])
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [
