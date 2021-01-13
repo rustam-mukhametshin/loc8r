@@ -35,6 +35,22 @@ export class LocationDetailsComponent implements OnInit {
     return !!(this.newReview.author && this.newReview.rating && this.newReview.reviewText);
   }
 
+  /**
+   * Reset form values
+   *
+   * @private
+   */
+  private resetAndHideReviewForm(): void {
+    this.formVisible = false;
+    this.newReview.author = '';
+    this.newReview.rating = 5;
+    this.newReview.reviewText = '';
+  }
+
+
+  /**
+   * Create review
+   */
   onReviewSubmit(): void {
 
     this.formError = '';
@@ -44,6 +60,8 @@ export class LocationDetailsComponent implements OnInit {
         .addReviewByLocationId(this.location._id, this.newReview)
         .then(review => {
           console.log(review);
+
+          this.resetAndHideReviewForm();
         })
       ;
     } else {
