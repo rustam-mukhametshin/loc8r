@@ -1,4 +1,6 @@
-export class Location {
+import { Review } from './Review';
+
+export interface Location {
   id: string;
   name: string;
   distance: number;
@@ -18,11 +20,4 @@ export class Location {
     }
   ];
   reviews: Review[];
-}
-
-export class Review {
-  author: string;
-  rating: number;
-  reviewText: string;
-  createdOn?: string;
 }

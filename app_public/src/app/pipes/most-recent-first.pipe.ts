@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Review } from '../models/Location';
+import { Review } from '../models/Review';
+
 
 @Pipe({
   name: 'mostRecentFirst'
