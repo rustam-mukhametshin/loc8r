@@ -14,6 +14,7 @@ import { RatingStarsComponent } from './views/rating-stars/rating-stars.componen
 import { DetailsPageComponent } from './views/details-page/details-page.component';
 import { LocationDetailsComponent } from './views/location-details/location-details.component';
 import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const layout = [
   FrameworkComponent,
@@ -45,6 +46,8 @@ const components = [
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {path: '', component: HomepageComponent},
       {path: 'location/:locationId', component: DetailsPageComponent},
