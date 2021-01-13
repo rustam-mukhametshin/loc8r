@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '../models/Location';
+import { Review } from '../models/Review';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,23 @@ export class DataService {
       .get(url)
       .toPromise()
       .then(response => response as Location)
+      .catch(this.handleError);
+  }
+
+  /**
+   * Create new review
+   *
+   * @param locationId
+   * @param formData
+   */
+  public addReviewByLocationId(locationId: string, formData: Review): Promise<any> {
+
+    const url = `${this.apiBaseUrl}/locations/${locationId}/reviews`;
+
+    return this.http
+      .post(url, formData)
+      .toPromise()
+      .then(response => response as Review)
       .catch(this.handleError);
   }
 
