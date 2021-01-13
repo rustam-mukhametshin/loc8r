@@ -1,4 +1,5 @@
 import { Review } from './Review';
+import { OpeningTimes } from './OpeningTimes';
 
 export interface Location {
   id: string;
@@ -10,14 +11,6 @@ export interface Location {
   coords: {
     coordinates: number[],
   };
-  openingTimes: [
-    {
-      id: string;
-      closed: boolean;
-      closing: string;
-      days: string;
-      opening: string;
-    }
-  ];
+  openingTimes: OpeningTimes[];
   reviews: Review[];
 }
