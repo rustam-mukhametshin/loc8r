@@ -52,7 +52,7 @@ export class DataService {
    * @param locationId
    * @param formData
    */
-  public addReviewByLocationId(locationId: string, formData: Review): Promise<any> {
+  public addReviewByLocationId(locationId: string, formData: Review): Promise<Review> {
 
     const url = `${this.apiBaseUrl}/locations/${locationId}/reviews`;
 

@@ -58,7 +58,7 @@ export class LocationDetailsComponent implements OnInit {
     if (this.formIsValid()) {
       this.dataService
         .addReviewByLocationId(this.location._id, this.newReview)
-        .then(review => {
+        .then((review: Review) => {
 
           const reviews = this.location.reviews.slice(0);
 
