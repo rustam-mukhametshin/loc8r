@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '../../models/Location';
 import { Review } from '../../models/Review';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-location-details',
@@ -22,7 +23,9 @@ export class LocationDetailsComponent implements OnInit {
   public formVisible = false;
   public formError: string;
 
-  constructor() {
+  constructor(
+    private dataService: DataService
+  ) {
   }
 
   ngOnInit(): void {
@@ -37,7 +40,12 @@ export class LocationDetailsComponent implements OnInit {
     this.formError = '';
 
     if (this.formIsValid()) {
-      // Add review
+      this.dataService
+        .addReviewByLocationId(this.location._id, this.newReview)
+        .then(review => {
+          console.log(review);
+        })
+      ;
     } else {
       this.formError = 'All fields required, please try again';
     }
