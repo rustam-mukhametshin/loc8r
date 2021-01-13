@@ -53,9 +53,12 @@
         <h2 class="card-title">Customer reviews</h2>
 
         <div *ngIf="formVisible">
-          <form action="">
+          <form (ngSubmit)="onReviewSubmit()">
             <hr>
             <h4>Add your review</h4>
+            <div *ngIf="formError" class="alert alert-danger" role="alert">
+              {{formError}}
+            </div>
 
             <div class="form-group row">
               <label for="name" class="col-sm-2 col-form-label">Name</label>

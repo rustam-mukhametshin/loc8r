@@ -20,6 +20,7 @@ export class LocationDetailsComponent implements OnInit {
   };
 
   public formVisible = false;
+  public formError: string;
 
   constructor() {
   }
@@ -27,4 +28,18 @@ export class LocationDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  private formIsValid(): boolean {
+    return !!(this.newReview.author && this.newReview.rating && this.newReview.reviewText);
+  }
+
+  onReviewSubmit(): void {
+
+    this.formError = '';
+
+    if (this.formIsValid()) {
+      // Add review
+    } else {
+      this.formError = 'All fields required, please try again';
+    }
+  }
 }
