@@ -21,8 +21,10 @@ const userSchema = new mongoose.Schema({
  * @param password
  */
 userSchema.methods.setPassword = function (password) {
+
     this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+
+    this.hash = this.generateHash(password, this.salt);
 }
 
 /**
@@ -31,10 +33,23 @@ userSchema.methods.setPassword = function (password) {
  * @param password
  */
 userSchema.methods.validPassword = function (password) {
-    const hash = crypto
-        .pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+
+    const hash = this.generateHash(password, this.salt);
 
     return this.hash === hash;
+}
+
+/**
+ * Generate hash
+ *
+ * @param password
+ * @param salt
+ * @returns {string}
+ */
+userSchema.methods.generateHash = function (password, salt) {
+    return crypto
+        .pbkdf2Sync(password, salt, 1000, 64, 'sha512')
+        .toString('hex');
 }
 
 mongoose.model('User', userSchema);
