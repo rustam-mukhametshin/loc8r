@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const ctrlLocations = require('../controllers/locations');
 const ctrlReviews = require('../controllers/reviews');
+const ctrlAuth = require('../controllers/authentication');
 
 // Locations
 router
@@ -25,5 +26,8 @@ router
     .get(ctrlReviews.reviewsReadOne)
     .put(ctrlReviews.reviewsUpdateOne)
     .delete(ctrlReviews.reviewsDeleteOne);
+
+// Authentication
+router.post('/register', ctrlAuth.register);
 
 module.exports = router;
