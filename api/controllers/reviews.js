@@ -301,15 +301,16 @@ function updateAverageRating(locationId) {
  * @param req
  * @param res
  * @param location
+ * @param author
  */
-function doAddReview(req, res, location) {
+function doAddReview(req, res, location, author) {
 
     if (!location) {
         res
             .status(404)
             .json({message: 'Location not found'});
     } else {
-        const {author, rating, reviewText} = req.body;
+        const {rating, reviewText} = req.body;
 
         // Add new review object to reviews array of objects.
         location.reviews.push({
@@ -346,24 +347,27 @@ function doAddReview(req, res, location) {
  * @param res
  */
 const reviewsCreate = (req, res) => {
-    const locationId = req.params.locationId;
-    if (locationId) {
-        Loc
-            .findById(locationId)
-            .select('reviews')
-            .exec((err, location) => {
-                if (err) {
-                    res.status(400)
-                        .json(err);
-                } else {
-                    doAddReview(req, res, location);
-                }
-            })
-    } else {
-        res
-            .status(400)
-            .json({message: 'Location not found'});
-    }
+    getAuthor(req, res, (req, res, userName) => {
+        const locationId = req.params.locationId;
+
+        if (locationId) {
+            Loc
+                .findById(locationId)
+                .select('reviews')
+                .exec((err, location) => {
+                    if (err) {
+                        res.status(400)
+                            .json(err);
+                    } else {
+                        doAddReview(req, res, location, userName);
+                    }
+                })
+        } else {
+            res
+                .status(400)
+                .json({message: 'Location not found'});
+        }
+    });
 };
 
 
