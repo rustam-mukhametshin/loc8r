@@ -30,4 +30,15 @@ export class HistoryService {
     const length = this.urls.length;
     return length > 1 ? this.urls[length - 2] : '/';
   }
+
+  /**
+   * Get last non login url
+   */
+  public getLastNonLoginUrl(): string {
+    const exclude = ['/register', '/login'];
+
+    const filtered = this.urls.filter(last => !exclude.includes(last));
+    const length = filtered.length;
+    return length > 1 ? filtered[length - 1] : '/';
+  }
 }
