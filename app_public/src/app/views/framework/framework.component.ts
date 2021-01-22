@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
+import { User } from '../../classes/user';
 
 @Component({
   selector: 'app-framework',
@@ -22,5 +23,14 @@ export class FrameworkComponent implements OnInit {
    */
   public isLoggedIn(): boolean {
     return this.authenticationService.isLoggedIn();
+  }
+
+  /**
+   * Get username
+   */
+  public getUsername(): string {
+    const user: User = this.authenticationService.getCurrentUser();
+
+    return user ? user.name : 'Guest';
   }
 }
