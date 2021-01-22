@@ -5,6 +5,7 @@ import { HomepageComponent } from '../views/homepage/homepage.component';
 import { DetailsPageComponent } from '../views/details-page/details-page.component';
 import { AboutComponent } from '../views/about/about.component';
 import { RegisterComponent } from '../views/register/register.component';
+import { LoginComponent } from '../views/login/login.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,12 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
-  }
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+
 ];
 
 @NgModule({
