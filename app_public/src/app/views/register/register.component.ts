@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
+  public pageContent = {
+    header: {
+      title: 'Create a new account',
+      strapline: ''
+    },
+    sidebar: ''
+  };
+
   constructor() { }
 
   ngOnInit(): void {
