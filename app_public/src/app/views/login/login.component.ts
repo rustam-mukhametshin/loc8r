@@ -9,6 +9,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
+  public formError = '';
+
   public credentials = {
     email: '',
     password: ''
@@ -35,9 +37,9 @@ export class LoginComponent implements OnInit {
    * Submit to register
    */
   public onLoginSubmit(): void {
-
+    this.formError = '';
     if (!this.credentials.email || !this.credentials.password) {
-
+      this.formError = 'All fields are required, please try again';
     } else {
       this.doLogin();
     }
@@ -52,6 +54,6 @@ export class LoginComponent implements OnInit {
     this.authenticationService
       .login(this.credentials)
       .then(() => this.router.navigateByUrl('/'))
-      .catch(err => console.log(err));
+      .catch(err => this.formError = err);
   }
 }
