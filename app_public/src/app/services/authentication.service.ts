@@ -60,4 +60,20 @@ export class AuthenticationService {
   public logout(): void {
     this.storage.removeItem(this.name);
   }
+
+  /**
+   * Check if user is logged in
+   */
+  isLoggedIn(): boolean {
+    const token: string = this.getToken();
+
+    if (token) {
+
+      const paylod = JSON.parse(atob(token.split('.')[1]));
+      return paylod.exp > (Date.now() / 1000);
+
+    }
+
+    return false;
+  }
 }
