@@ -22,4 +22,12 @@ export class HistoryService {
         this.urls = [...this.urls, url];
       });
   }
+
+  /**
+   * Get previous url
+   */
+  public getPreviousUrl(): string {
+    const length = this.urls.length;
+    return length > 1 ? this.urls[length - 2] : '/';
+  }
 }
