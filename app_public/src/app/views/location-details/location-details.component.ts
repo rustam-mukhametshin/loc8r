@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '../../models/Location';
 import { Review } from '../../models/Review';
 import { DataService } from '../../services/data.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-location-details',
@@ -24,7 +25,8 @@ export class LocationDetailsComponent implements OnInit {
   public formError: string;
 
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    private authenticationService: AuthenticationService
   ) {
   }
 
@@ -72,5 +74,12 @@ export class LocationDetailsComponent implements OnInit {
     } else {
       this.formError = 'All fields required, please try again';
     }
+  }
+
+  /**
+   * Wrapper to check if user is logged in
+   */
+  public isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn();
   }
 }
