@@ -44,7 +44,7 @@ const register = (req, res) => {
  * @returns {*}
  */
 const login = (req, res) => {
-    if (!req.body.name || !req.body.email || !req.body.password) {
+    if (!req.body.email || !req.body.password) {
         return res
             .status(400)
             .json({message: 'All fields required'});
