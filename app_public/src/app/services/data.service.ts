@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { User } from '../classes/user';
 import { AuthResponse } from '../classes/authresponse';
 import { BROWSER_STORAGE } from '../classes/storage';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,17 +25,12 @@ export class DataService {
   /**
    * Get locations
    */
-  public getLocations(lat: number, lng: number): Promise<Location[]> {
+  public getLocations(lat: number, lng: number): Observable<Location[]> {
     const maxDistance = 20;
 
     const url = `${this.apiBaseUrl}/locations?lng=${lng}&lat=${lat}&maxDistance=${maxDistance}`;
 
-    // Todo: change to observable
-    return this.http
-      .get(url)
-      .toPromise()
-      .then(response => response as Location[])
-      .catch(this.handleError);
+    return this.http.get<Location[]>(url);
   }
 
   /**

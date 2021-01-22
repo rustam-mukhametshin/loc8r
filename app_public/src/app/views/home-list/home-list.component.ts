@@ -39,13 +39,12 @@ export class HomeListComponent implements OnInit {
 
     this.dataService
       .getLocations(lat, lng)
-      .then(foundLocation => {
+      .subscribe((foundLocations: Location[]) => {
 
-        this.message = foundLocation.length > 0 ? '' : 'No locations found';
+        this.message = foundLocations.length > 0 ? '' : 'No locations found';
 
-        this.locations = foundLocation;
-      })
-    ;
+        this.locations = foundLocations;
+      });
   }
 
   /**
