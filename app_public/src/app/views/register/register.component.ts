@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -6,6 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+
+  public formError = '';
+
+  public credentials = {
+    name: '',
+    email: '',
+    password: ''
+  };
 
   public pageContent = {
     header: {
@@ -15,9 +25,36 @@ export class RegisterComponent implements OnInit {
     sidebar: ''
   };
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
+  /**
+   * Submit to register
+   */
+  onRegisterSubmit() {
+    this.formError = '';
+    if (!this.credentials.name || !this.credentials.email || !this.credentials.password) {
+      this.formError = 'All fields are required, please try again';
+    } else {
+      this.doRegister();
+    }
+  }
+
+  /**
+   * Registration
+   *
+   * @private
+   */
+  private doRegister(): void {
+    this.authenticationService
+      .register(this.credentials)
+      .then(() => this.router.navigateByUrl('/'))
+      .catch(err => this.formError = err);
+  }
 }
