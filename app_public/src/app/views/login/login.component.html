@@ -4,5 +4,24 @@
   <div class="col-12 col-md-8">
     <p class="lead">Not a member? Please <a routerLink="/register">register</a> first</p>
 
+    <form>
+
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input [(ngModel)]="credentials.email" type="text" class="form-control" id="email"
+               name="email" placeholder="Enter email address">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input [(ngModel)]="credentials.password" type="password" class="form-control" id="password"
+               name="password" placeholder="e.g 12+ alphanumerics">
+      </div>
+
+      <button type="submit" role="button" class="btn btn-primary">Sign in!</button>
+
+    </form>
+  </div>
+
   <app-sidebar [content]="pageContent.sidebar" class="col-12 col-md-4"></app-sidebar>
 </div>
