@@ -4,7 +4,7 @@
   <div class="col-12 col-md-8">
     <p class="lead">Not a member? Please <a routerLink="/register">register</a> first</p>
 
-    <form>
+    <form (submit)="onLoginSubmit()">
 
       <div class="form-group">
         <label for="email">Email address</label>
