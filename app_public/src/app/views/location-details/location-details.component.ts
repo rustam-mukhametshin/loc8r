@@ -82,4 +82,12 @@ export class LocationDetailsComponent implements OnInit {
   public isLoggedIn(): boolean {
     return this.authenticationService.isLoggedIn();
   }
+
+  /**
+   * Get username
+   */
+  public getUsername(): string {
+    const {name} = this.authenticationService.getCurrentUser();
+    return name ?? 'Guest';
+  }
 }
