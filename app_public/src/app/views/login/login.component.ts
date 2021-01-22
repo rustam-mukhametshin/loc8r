@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
+import { HistoryService } from '../../services/history.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private historyService: HistoryService
   ) {
   }
 
@@ -53,7 +55,7 @@ export class LoginComponent implements OnInit {
   private doLogin(): void {
     this.authenticationService
       .login(this.credentials)
-      .then(() => this.router.navigateByUrl('/'))
+      .then(() => this.router.navigateByUrl(this.historyService.getLastNonLoginUrl()))
       .catch(err => this.formError = err);
   }
 }
