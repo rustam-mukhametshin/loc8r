@@ -17,6 +17,12 @@ export class FrameworkComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Logout
+   */
+  public doLogout(): void {
+    this.authenticationService.logout();
+  }
 
   /**
    * Check if user is logged in
