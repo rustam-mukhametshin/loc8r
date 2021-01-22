@@ -38,7 +38,7 @@ export class HomeListComponent implements OnInit {
     const lng: number = position.coords.longitude;
 
     this.dataService
-      .getLocation(lat, lng)
+      .getLocations(lat, lng)
       .then(foundLocation => {
 
         this.message = foundLocation.length > 0 ? '' : 'No locations found';

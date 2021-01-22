@@ -22,9 +22,9 @@ export class DataService {
   private apiBaseUrl = environment.apiBaseUrl;
 
   /**
-   * Get location
+   * Get locations
    */
-  public getLocation(lat: number, lng: number): Promise<Location[]> {
+  public getLocations(lat: number, lng: number): Promise<Location[]> {
     const maxDistance = 20;
 
     const url = `${this.apiBaseUrl}/locations?lng=${lng}&lat=${lat}&maxDistance=${maxDistance}`;
