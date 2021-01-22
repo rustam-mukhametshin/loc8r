@@ -56,6 +56,7 @@ export class LocationDetailsComponent implements OnInit {
   onReviewSubmit(): void {
 
     this.formError = '';
+    this.newReview.author = this.getUsername();
 
     if (this.formIsValid()) {
       this.dataService
