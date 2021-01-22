@@ -1,17 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '../models/Location';
 import { Review } from '../models/Review';
 import { environment } from '../../environments/environment';
 import { User } from '../classes/user';
 import { AuthResponse } from '../classes/authresponse';
+import { BROWSER_STORAGE } from '../classes/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    @Inject(BROWSER_STORAGE) private storage: Storage
+  ) {
   }
 
   // Todo: remove
@@ -57,10 +61,16 @@ export class DataService {
    */
   public addReviewByLocationId(locationId: string, formData: Review): Promise<Review> {
 
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.storage.getItem('loc8r-token')}`
+      })
+    };
+
     const url = `${this.apiBaseUrl}/locations/${locationId}/reviews`;
 
     return this.http
-      .post(url, formData)
+      .post(url, formData, httpOptions)
       .toPromise()
       .then(response => response as Review)
       .catch(this.handleError);
