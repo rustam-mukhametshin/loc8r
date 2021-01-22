@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '../models/Location';
 import { Review } from '../models/Review';
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
+import { User } from '../classes/user';
+import { AuthResponse } from '../classes/authresponse';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +63,41 @@ export class DataService {
       .post(url, formData)
       .toPromise()
       .then(response => response as Review)
+      .catch(this.handleError);
+  }
+
+  /**
+   * Login
+   *
+   * @param user
+   */
+  public login(user: User): Promise<AuthResponse> {
+    return this.makeAuthApiCall('login', user);
+  }
+
+  /**
+   * Registration
+   *
+   * @param user
+   */
+  public register(user: User): Promise<AuthResponse> {
+    return this.makeAuthApiCall('register', user);
+  }
+
+  /**
+   * Make auth api call
+   *
+   * @param urlPath
+   * @param user
+   * @private
+   */
+  private makeAuthApiCall(urlPath: string, user: User): Promise<AuthResponse> {
+    const url = `${this.apiBaseUrl}/${urlPath}`;
+
+    return this.http
+      .post(url, user)
+      .toPromise()
+      .then(response => response as AuthResponse)
       .catch(this.handleError);
   }
 
