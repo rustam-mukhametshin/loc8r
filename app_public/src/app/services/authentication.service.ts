@@ -25,10 +25,39 @@ export class AuthenticationService {
   }
 
   /**
-   * Get token from localstorage
+   * Save token to localstorage
    * @param token payload
    */
   public saveToken(token: string): void {
     this.storage.setItem(this.name, token);
+  }
+
+  /**
+   * Login
+   *
+   * @param user: User
+   */
+  public login(user: User): Promise<any> {
+    return this.dataService
+      .login(user)
+      .then((authResp: AuthResponse) => this.saveToken(authResp.token));
+  }
+
+  /**
+   * Register
+   *
+   * @param user: User
+   */
+  public register(user: User): Promise<any> {
+    return this.dataService
+      .register(user)
+      .then((authResp: AuthResponse) => this.saveToken(authResp.token));
+  }
+
+  /**
+   * Logout
+   */
+  public logout(): void {
+    this.storage.removeItem(this.name);
   }
 }
