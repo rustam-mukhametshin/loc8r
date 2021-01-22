@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  public pageContent = {
+    header: {
+      title: 'Sign in to Loc8r',
+      strapline: ''
+    },
+    sidebar: ''
+  };
+
   constructor() { }
 
   ngOnInit(): void {
