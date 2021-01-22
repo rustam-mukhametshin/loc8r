@@ -15,6 +15,7 @@ import { LocationDetailsComponent } from './views/location-details/location-deta
 import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { RegisterComponent } from './views/register/register.component';
 
 const layout = [
   FrameworkComponent,
@@ -35,6 +36,7 @@ const components = [
   RatingStarsComponent,
   DetailsPageComponent,
   LocationDetailsComponent,
+  RegisterComponent,
 ];
 
 @NgModule({
