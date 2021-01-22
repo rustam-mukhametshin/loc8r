@@ -10,6 +10,11 @@
         <a routerLink="about" class="nav-link">About</a>
       </li>
     </ul>
+    <ul class="navbar-nav justify-content-end">
+      <li class="nav-item" routerLinkActive="active" *ngIf="!isLoggedIn()">
+        <a routerLink="login" class="nav-link">Sign in</a>
+      </li>
+    </ul>
   </div>
 </nav>
 

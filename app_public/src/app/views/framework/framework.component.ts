@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-framework',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrameworkComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authenticationService: AuthenticationService
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
+
+  /**
+   * Check if user is logged in
+   */
+  public isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn();
+  }
 }
