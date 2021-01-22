@@ -1,16 +1,15 @@
 <nav class="navbar fixed-top navbar-expand-md navbar-light">
-  <div class=”container”>
-    <a routerLink="" class="navbar-brand">Loc8r</a>
-    <button type="button" data-toggle="collapse" data-target="#navbarMain" class="navbar-toggler">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="navbarMain" class="navbar-collapse collapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a routerLink="about" routerLinkActive="active" class="nav-link">About</a>
-        </li>
-      </ul>
-    </div>
+  <a routerLink="" class="navbar-brand">Loc8r</a>
+  <button type="button" data-toggle="collapse" data-target="#navbarMain" class="navbar-toggler">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarMain">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a routerLink="about" class="nav-link">About</a>
+      </li>
+    </ul>
   </div>
 </nav>
 
