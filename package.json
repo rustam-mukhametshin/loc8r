@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "nodemon": "nodemon",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build": "npm run build --prefix app_public"
   },
   "engines": {
     "node": ">=14.4.0",
