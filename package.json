@@ -5,7 +5,7 @@
   "scripts": {
     "nodemon": "nodemon",
     "start": "node ./bin/www",
-    "build": "npm run build --prefix app_public",
+    "build": "cd app_public && npm run build",
     "postinstall": "npm install --prefix app_public"
   },
   "engines": {
