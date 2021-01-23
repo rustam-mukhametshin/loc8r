@@ -6,7 +6,7 @@
     "nodemon": "nodemon",
     "start": "node ./bin/www",
     "build": "cd app_public && npm run build",
-    "postinstall": "npm install --prefix app_public"
+    "postinstall": "cd app_public; npm install"
   },
   "cacheDirectories": ["node_modules", "app_public/node_modules"],
   "engines": {
