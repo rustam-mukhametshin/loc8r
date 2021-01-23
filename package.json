@@ -5,7 +5,7 @@
   "scripts": {
     "nodemon": "nodemon",
     "start": "node ./bin/www",
-    "build": "npm run build --prefix app_public"
+    "build": "npm i --prefix app_public && npm run build --prefix app_public"
   },
   "engines": {
     "node": ">=14.4.0",
