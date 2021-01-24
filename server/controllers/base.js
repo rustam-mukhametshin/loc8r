@@ -4,7 +4,7 @@ const apiOptions = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-    apiOptions.server = 'https://someApp.herokuapp.com';
+    apiOptions.server = process.env.MONGODB_URI;
 }
 
 /**
