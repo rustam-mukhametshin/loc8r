@@ -22,7 +22,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_public'))); // Angular
-app.use(express.static(path.join(__dirname, 'app_public', 'build')));
+app.use(express.static(path.join(__dirname, 'app_public', 'dist')));
 
 app.use(passport.initialize());
 
@@ -35,7 +35,7 @@ app.use('/api', (req, res, next) => {
 // app.use('/', indexRouter);
 app.use('/api', apiRouter);
 app.get(/(\/about)|(\/location\/[a-z0-9]{24})/, function (req, res, next) {
-    res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'app_public', 'dist', 'index.html'));
 });
 
 // Catch unauthorised errors
