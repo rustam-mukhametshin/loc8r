@@ -1,4 +1,4 @@
 export const environment = {
-  apiBaseUrl: process.env.API_URI,
+  apiBaseUrl: 'https://obscure-basin-51263.herokuapp.com/api',
   production: true
 };
