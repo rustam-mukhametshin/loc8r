@@ -15,7 +15,7 @@ if (process.platform === 'win32') {
 // Define DB and open Mongoose connection
 let dbURI = 'mongodb://localhost/Loc8r';
 if (process.env.NODE_ENV === 'production') {
-   dbURI = process.env.MONGODB_URI;
+   dbURI = `mongodb+srv://${process.env.DB_USER}:<${process.env.DB_PASS}>@cluster0.ogruv.mongodb.net/<${process.env.DB_NAME}>?retryWrites=true&w=majority`;
 }
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true});
 
