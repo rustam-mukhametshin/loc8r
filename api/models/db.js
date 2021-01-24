@@ -13,7 +13,10 @@ if (process.platform === 'win32') {
 }
 
 // Define DB and open Mongoose connection
-const dbURI = 'mongodb://localhost/Loc8r';
+let dbURI = 'mongodb://localhost/Loc8r';
+if (process.env.NODE_ENV) {
+   dbURI = process.env.MONGODB_URI;
+}
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 // Listeners for Mongoose connection
