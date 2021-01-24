@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "nodemon": "nodemon",
     "start": "node ./bin/www",
     "heroku-postbuild": "npm install --prefix app_public && npm run build --prefix app_public"
   },
