@@ -5,8 +5,7 @@
   "scripts": {
     "nodemon": "nodemon",
     "start": "node ./bin/www",
-    "build": "cd app_public && npm run build",
-    "postinstall": "cd app_public; npm install"
+    "heroku-postbuild": "npm install --prefix app_public && npm run build --prefix app_public"
   },
   "cacheDirectories": ["node_modules", "app_public/node_modules"],
   "engines": {
