@@ -30,7 +30,7 @@ export class HomeListComponent implements OnInit {
    *
    * @private
    */
-  private getLocations(position: Position): void {
+  private getLocations(position): void {
 
     this.message = 'Searching for nearby places';
 
