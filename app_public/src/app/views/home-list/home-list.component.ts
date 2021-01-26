@@ -17,8 +17,6 @@ export class HomeListComponent implements OnInit {
     private dataService: DataService,
     private geolocationService: GeolocationService
   ) {
-    this.dataService = dataService;
-    this.geolocationService = geolocationService;
   }
 
   ngOnInit(): void {
