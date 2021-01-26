@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '../../models/Location';
 import { DataService } from '../../services/data.service';
 import { GeolocationService } from '../../services/geolocation.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-list',
@@ -9,7 +11,7 @@ import { GeolocationService } from '../../services/geolocation.service';
   styleUrls: ['./home-list.component.scss']
 })
 export class HomeListComponent implements OnInit {
-  public locations: Location[];
+  public locations$: Observable<Location[]>;
 
   public message: string;
 

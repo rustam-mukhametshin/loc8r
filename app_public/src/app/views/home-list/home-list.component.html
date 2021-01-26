@@ -1,6 +1,6 @@
 <div class="error">{{message}}</div>
 
-<div class="card" *ngFor="let location of locations">
+<div class="card" *ngFor="let location of (locations$ | async)">
   <div class="card-block">
     <h4>
       <a routerLink="/location/{{location.id}}">{{location.name}}</a>
