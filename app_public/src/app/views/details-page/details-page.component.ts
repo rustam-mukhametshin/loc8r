@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { switchMap } from 'rxjs/operators';
 import { Location } from '../../models/Location';
+import { PageInfo } from '../../interfaces/PageInfo';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { Location } from '../../models/Location';
   templateUrl: './details-page.component.html',
   styleUrls: ['./details-page.component.scss']
 })
-export class DetailsPageComponent implements OnInit {
+export class DetailsPageComponent implements OnInit, PageInfo {
 
   locationId: string;
   location: Location;
