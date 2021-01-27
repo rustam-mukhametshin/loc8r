@@ -8,6 +8,7 @@ import { AuthResponse } from '../classes/authresponse';
 import { BROWSER_STORAGE } from '../classes/storage';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +17,17 @@ export class DataService {
 
   constructor(
     private http: HttpClient,
+    private urlService: UrlService,
     @Inject(BROWSER_STORAGE) private storage: Storage
   ) {
   }
-
-  // Todo: remove
-  private apiBaseUrl = environment.apiBaseUrl;
 
   /**
    * Get locations
    */
   public getLocations(lat: number, lng: number): Observable<Location[]> {
-    const maxDistance = 20;
 
-    const url = `${this.apiBaseUrl}/locations?lng=${lng}&lat=${lat}&maxDistance=${maxDistance}`;
+    const url = this.urlService.getLocations(lng, lat);
 
     return this.http.get<Location[]>(url);
   }
@@ -41,7 +39,7 @@ export class DataService {
    */
   public getLocationById(locationId: string): Observable<Location> {
 
-    const url = `${this.apiBaseUrl}/locations/${locationId}`;
+    const url = this.urlService.getLocation(locationId);
 
     return this.http
       .get<Location>(url)
@@ -64,7 +62,7 @@ export class DataService {
       })
     };
 
-    const url = `${this.apiBaseUrl}/locations/${locationId}/reviews`;
+    const url = this.urlService.getLocationReviews(locationId);
 
     return this.http
       .post(url, formData, httpOptions)
@@ -99,7 +97,7 @@ export class DataService {
    * @private
    */
   private makeAuthApiCall(urlPath: string, user: User): Promise<AuthResponse> {
-    const url = `${this.apiBaseUrl}/${urlPath}`;
+    const url = this.urlService.getAuthPath(urlPath);
 
     return this.http
       .post(url, user)
