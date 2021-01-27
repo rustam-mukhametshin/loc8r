@@ -7,6 +7,7 @@ import { User } from '../classes/user';
 import { AuthResponse } from '../classes/authresponse';
 import { BROWSER_STORAGE } from '../classes/storage';
 import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -38,15 +39,15 @@ export class DataService {
    *
    * @param locationId
    */
-  public getLocationById(locationId: string): Promise<Location> {
+  public getLocationById(locationId: string): Observable<Location> {
 
     const url = `${this.apiBaseUrl}/locations/${locationId}`;
 
     return this.http
-      .get(url)
-      .toPromise()
-      .then(response => response as Location)
-      .catch(this.handleError);
+      .get<Location>(url)
+      .pipe(
+        shareReplay()
+      );
   }
 
   /**
