@@ -3,7 +3,7 @@ import { Location } from '../../models/Location';
 import { DataService } from '../../services/data.service';
 import { GeolocationService } from '../../services/geolocation.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-list',
@@ -37,14 +37,13 @@ export class HomeListComponent implements OnInit {
     const lat: number = position.coords.latitude;
     const lng: number = position.coords.longitude;
 
-    this.dataService
-      .getLocations(lat, lng)
-      .subscribe((foundLocations: Location[]) => {
+    const locations$ = this.dataService.getLocations(lat, lng);
 
-        this.message = foundLocations.length > 0 ? '' : 'No locations found';
-
-        this.locations = foundLocations;
-      });
+    this.locations$ = locations$
+      .pipe(
+        tap(locations => this.message = locations.length > 0 ? '' : 'No locations found'
+        )
+      );
   }
 
   /**
