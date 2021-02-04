@@ -17,10 +17,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { RegisterComponent } from './views/register/register.component';
 import { LoginComponent } from './views/login/login.component';
+import { LoadingComponent } from './views/components/loading/loading.component';
 
 const layout = [
   FrameworkComponent,
   PageHeaderComponent,
+  LoadingComponent,
 ];
 
 const pipes = [
