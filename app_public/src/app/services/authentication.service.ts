@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { BROWSER_STORAGE } from '../classes/storage';
 import { User } from '../classes/user';
-import { DataService } from './data.service';
+import { LocationService } from './location.service';
 import { AuthResponse } from '../classes/authresponse';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class AuthenticationService {
 
   constructor(
     @Inject(BROWSER_STORAGE) private storage: Storage,
-    private dataService: DataService
+    private dataService: LocationService
   ) {
   }
 

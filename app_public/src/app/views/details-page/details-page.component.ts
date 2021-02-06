@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { DataService } from '../../services/data.service';
+import { LocationService } from '../../services/location.service';
 import { switchMap } from 'rxjs/operators';
 import { Location } from '../../models/Location';
 import { PageInfo } from '../../interfaces/PageInfo';
@@ -18,7 +18,7 @@ export class DetailsPageComponent implements OnInit, PageInfo {
 
   constructor(
     private route: ActivatedRoute,
-    private dataService: DataService
+    private dataService: LocationService
   ) {
   }
 

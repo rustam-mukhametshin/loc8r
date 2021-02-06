@@ -13,7 +13,7 @@ import { UrlService } from './url.service';
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class LocationService {
 
   constructor(
     private http: HttpClient,

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '../../models/Location';
 import { Review } from '../../models/Review';
-import { DataService } from '../../services/data.service';
+import { LocationService } from '../../services/location.service';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class LocationDetailsComponent implements OnInit {
   public formError: string;
 
   constructor(
-    private dataService: DataService,
+    private dataService: LocationService,
     private authenticationService: AuthenticationService
   ) {
   }
