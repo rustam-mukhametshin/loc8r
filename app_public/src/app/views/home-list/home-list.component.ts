@@ -3,7 +3,8 @@ import { Location } from '../../models/Location';
 import { DataService } from '../../services/data.service';
 import { GeolocationService } from '../../services/geolocation.service';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { finalize, tap } from 'rxjs/operators';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-home-list',
@@ -17,7 +18,8 @@ export class HomeListComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private geolocationService: GeolocationService
+    private geolocationService: GeolocationService,
+    private loadingService: LoadingService
   ) {
   }
 
@@ -42,7 +44,10 @@ export class HomeListComponent implements OnInit {
     this.locations$ = locations$
       .pipe(
         tap(locations => this.message = locations.length > 0 ? '' : 'No locations found'
-        )
+        ),
+        finalize(() => {
+          this.loadingService.loadingOff();
+        })
       );
   }
 
@@ -73,6 +78,8 @@ export class HomeListComponent implements OnInit {
    */
   private getPosition(): void {
     this.message = 'Getting you location ...';
+
+    this.loadingService.loadingOn();
 
     this.geolocationService.getPosition(
       this.getLocations.bind(this),
