@@ -5,6 +5,7 @@ import { GeolocationService } from '../../services/geolocation.service';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { LoadingService } from '../../services/loading.service';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-home-list',
@@ -19,7 +20,8 @@ export class HomeListComponent implements OnInit {
   constructor(
     private dataService: LocationService,
     private geolocationService: GeolocationService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private messageService: MessageService
   ) {
   }
 
@@ -34,8 +36,6 @@ export class HomeListComponent implements OnInit {
    */
   private getLocations(position): void {
 
-    this.message = 'Searching for nearby places';
-
     const lat: number = position.coords.latitude;
     const lng: number = position.coords.longitude;
 
@@ -43,7 +43,7 @@ export class HomeListComponent implements OnInit {
 
     this.locations$ = locations$
       .pipe(
-        tap(locations => this.message = locations.length > 0 ? '' : 'No locations found'
+        tap(locations => locations.length > 0 ? '' : this.messageService.showErrors('No locations found')
         ),
         finalize(() => {
           this.loadingService.loadingOff();
@@ -58,7 +58,7 @@ export class HomeListComponent implements OnInit {
    * @private
    */
   private showError(error: any): void {
-    this.message = error.message;
+    this.messageService.showErrors(error.message);
   }
 
 
@@ -68,7 +68,7 @@ export class HomeListComponent implements OnInit {
    * @private
    */
   private noGeo(): void {
-    this.message = 'Geolocation not supported by this browser';
+    this.messageService.showErrors('Geolocation not supported by this browser');
   }
 
   /**
@@ -77,7 +77,6 @@ export class HomeListComponent implements OnInit {
    * @private
    */
   private getPosition(): void {
-    this.message = 'Getting you location ...';
 
     this.loadingService.loadingOn();
 
