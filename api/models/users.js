@@ -3,17 +3,17 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        unique: true,
-        required: true
-    },
-    name: {
-        type: String,
-        required: true
-    },
-    hash: String,
-    salt: String
+  email: {
+    type: String,
+    unique: true,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  hash: String,
+  salt: String
 });
 
 /**
@@ -23,9 +23,9 @@ const userSchema = new mongoose.Schema({
  */
 userSchema.methods.setPassword = function (password) {
 
-    this.salt = crypto.randomBytes(16).toString('hex');
+  this.salt = crypto.randomBytes(16).toString('hex');
 
-    this.hash = this.generateHash(password, this.salt);
+  this.hash = this.generateHash(password, this.salt);
 }
 
 /**
@@ -35,9 +35,9 @@ userSchema.methods.setPassword = function (password) {
  */
 userSchema.methods.validPassword = function (password) {
 
-    const hash = this.generateHash(password, this.salt);
+  const hash = this.generateHash(password, this.salt);
 
-    return this.hash === hash;
+  return this.hash === hash;
 }
 
 /**
@@ -48,9 +48,9 @@ userSchema.methods.validPassword = function (password) {
  * @returns {string}
  */
 userSchema.methods.generateHash = function (password, salt) {
-    return crypto
-        .pbkdf2Sync(password, salt, 1000, 64, 'sha512')
-        .toString('hex');
+  return crypto
+    .pbkdf2Sync(password, salt, 1000, 64, 'sha512')
+    .toString('hex');
 }
 
 /**
@@ -59,16 +59,16 @@ userSchema.methods.generateHash = function (password, salt) {
  * @returns {*}
  */
 userSchema.methods.generateJwt = function () {
-    const expire = new Date();
+  const expire = new Date();
 
-    expire.setDate(expire.getDate() + 7);
+  expire.setDate(expire.getDate() + 7);
 
-    return jwt.sign({
-        _id: this._id,
-        email: this.email,
-        name: this.email,
-        exp: parseInt(expire.getTime() / 1000, 10),
-    }, process.env.JWT_SECRET)
+  return jwt.sign({
+    _id: this._id,
+    email: this.email,
+    name: this.email,
+    exp: parseInt(expire.getTime() / 1000, 10),
+  }, process.env.JWT_SECRET)
 }
 
 mongoose.model('User', userSchema);
