@@ -21,6 +21,7 @@ import { LoadingComponent } from './views/components/loading/loading.component';
 import { LoadingService } from './services/loading.service';
 import { MessageComponent } from './views/components/message/message.component';
 import { MessageService } from './services/message.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const layout = [
   FrameworkComponent,
@@ -59,6 +60,7 @@ const components = [
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     LoadingService,
