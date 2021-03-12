@@ -7,6 +7,7 @@
     "build": "ng build --prod",
     "test": "ng test",
     "ci:test": "ng test -- --no-watch --no-progress --browsers=ChromeHeadlessCI",
+    "test:dev": "ng test --karmaConfig=karma.conf.dev.js",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
