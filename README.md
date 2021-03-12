@@ -1,5 +1,6 @@
 # Loc8r
 
+[![AngularTest](https://github.com/iproman/loc8r/actions/workflows/ngtest.yml/badge.svg)](https://github.com/iproman/loc8r/actions/workflows/ngtest.yml)
 [![EditorConfig](https://github.com/iproman/loc8r/actions/workflows/editorconfig.yml/badge.svg?branch=main)](https://github.com/iproman/loc8r/actions/workflows/editorconfig.yml)
 
 Find places to work with wifi near you!
