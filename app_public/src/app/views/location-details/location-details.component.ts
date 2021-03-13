@@ -80,9 +80,10 @@ export class LocationDetailsComponent implements OnInit, OnDestroy {
         )
         .subscribe((review: Review) => {
 
-          const reviews = this.location.reviews.slice(0);
-          reviews.unshift(review);
-          this.location.reviews = reviews;
+          this.location.reviews = [
+            review,
+            ...this.location.reviews
+          ];
 
           this.resetAndHideReviewForm();
         })
