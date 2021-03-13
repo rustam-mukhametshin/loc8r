@@ -17,7 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { RegisterComponent } from './views/register/register.component';
 import { LoginComponent } from './views/login/login.component';
-import { LoadingComponent } from './views/components/loading/loading.component';
+import { LoadingComponent } from './views/_layout/loading/loading.component';
 import { LoadingService } from './services/loading.service';
 import { MessageComponent } from './views/components/message/message.component';
 import { MessageService } from './services/message.service';
