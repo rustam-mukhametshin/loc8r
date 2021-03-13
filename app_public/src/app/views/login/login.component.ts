@@ -19,11 +19,6 @@ export class LoginComponent implements OnInit, PageInfo {
 
   public formError = '';
 
-  public credentials = {
-    email: '',
-    password: ''
-  };
-
   public pageContent = {
     header: {
       title: 'Sign in to Loc8r',
@@ -58,12 +53,10 @@ export class LoginComponent implements OnInit, PageInfo {
    * Submit to register
    */
   public onLoginSubmit(): void {
-    this.formError = '';
-    if (!this.credentials.email || !this.credentials.password) {
-      this.formError = 'All fields are required, please try again';
-    } else {
-      this.doLogin();
+    if (this.form.invalid) {
+      return;
     }
+    this.doLogin();
   }
 
   /**
