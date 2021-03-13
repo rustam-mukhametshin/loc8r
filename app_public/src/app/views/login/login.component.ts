@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { HistoryService } from '../../services/history.service';
 import { PageInfo } from '../../interfaces/PageInfo';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,8 @@ import { PageInfo } from '../../interfaces/PageInfo';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, PageInfo {
+
+  form: FormGroup;
 
   public formError = '';
 
@@ -34,6 +37,18 @@ export class LoginComponent implements OnInit, PageInfo {
   }
 
   ngOnInit(): void {
+    this.form = new FormGroup(
+      {
+        email: new FormControl(null, [
+          Validators.required,
+          Validators.email
+        ]),
+        password: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(6)
+        ])
+      }
+    );
   }
 
   /**
