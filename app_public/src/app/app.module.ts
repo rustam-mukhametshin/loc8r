@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HomeListComponent } from './views/home-list/home-list.component';
 import { DistancePipe } from './pipes/distance.pipe';
 import { HttpClientModule } from '@angular/common/http';
-import { FrameworkComponent } from './views/framework/framework.component';
+import { FrameworkComponent } from './views/_layout/framework/framework.component';
 import { AboutComponent } from './views/about/about.component';
 import { HomepageComponent } from './views/homepage/homepage.component';
 import { PageHeaderComponent } from './views/page-header/page-header.component';
