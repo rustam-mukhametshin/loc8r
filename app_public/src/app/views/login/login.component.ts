@@ -6,6 +6,7 @@ import { PageInfo } from '../../interfaces/PageInfo';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { User } from '../../classes/user';
 
 @Component({
   selector: 'app-login',
@@ -71,8 +72,11 @@ export class LoginComponent implements OnInit, PageInfo {
    * @private
    */
   private doLogin(): void {
+
+    const user: User = this.form.value;
+
     this.authenticationService
-      .login(this.credentials)
+      .login(user)
       .pipe(
         catchError(err => {
           this.formError = err;
