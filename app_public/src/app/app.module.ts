@@ -22,6 +22,7 @@ import { LoadingService } from './services/loading.service';
 import { MessageComponent } from './views/components/message/message.component';
 import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const layout = [
   FrameworkComponent,
@@ -48,6 +49,10 @@ const components = [
   MessageComponent,
 ];
 
+const material = [
+  MatProgressSpinnerModule,
+];
+
 @NgModule({
   declarations: [
     ...pipes,
@@ -61,6 +66,7 @@ const components = [
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ...material,
   ],
   providers: [
     LoadingService,
