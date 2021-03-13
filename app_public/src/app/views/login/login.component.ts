@@ -35,6 +35,14 @@ export class LoginComponent implements OnInit, PageInfo {
   }
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  /**
+   * Init form
+   * @private
+   */
+  private initForm(): void {
     this.form = new FormGroup(
       {
         email: new FormControl(null, [
