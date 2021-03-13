@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit, PageInfo, OnDestroy {
 
   private lSub: Subscription;
 
+  submitted: boolean;
+
   public formError = '';
 
   public pageContent = {
@@ -76,6 +78,7 @@ export class LoginComponent implements OnInit, PageInfo, OnDestroy {
     }
 
     this.loadingService.loadingOn();
+    this.submitted = true;
 
     this.doLogin();
   }
@@ -99,6 +102,7 @@ export class LoginComponent implements OnInit, PageInfo, OnDestroy {
         }),
         finalize(() => {
           this.loadingService.loadingOff();
+          this.submitted = false;
         })
       )
       .subscribe(() => {
