@@ -13,7 +13,7 @@ export class AuthenticationService {
 
   constructor(
     @Inject(BROWSER_STORAGE) private storage: Storage,
-    private dataService: LocationService
+    private locationService: LocationService
   ) {
   }
 
@@ -38,7 +38,7 @@ export class AuthenticationService {
    * @param user: User
    */
   public login(user: User): Promise<any> {
-    return this.dataService
+    return this.locationService
       .login(user)
       .then((authResp: AuthResponse) => this.saveToken(authResp.token));
   }
@@ -49,7 +49,7 @@ export class AuthenticationService {
    * @param user: User
    */
   public register(user: User): Promise<any> {
-    return this.dataService
+    return this.locationService
       .register(user)
       .then((authResp: AuthResponse) => this.saveToken(authResp.token));
   }
