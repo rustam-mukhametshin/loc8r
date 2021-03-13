@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit, PageInfo, OnDestroy {
       .login(user)
       .pipe(
         catchError(err => {
-          this.formError = err;
+          this.formError = err.error.message;
           console.error('While logging ...', err);
           return throwError(err);
         }),
