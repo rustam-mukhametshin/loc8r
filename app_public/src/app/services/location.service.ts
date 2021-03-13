@@ -1,14 +1,13 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '../models/Location';
 import { Review } from '../models/Review';
-import { environment } from '../../environments/environment';
 import { User } from '../classes/user';
 import { AuthResponse } from '../classes/authresponse';
-import { BROWSER_STORAGE } from '../classes/storage';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { UrlService } from './url.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,7 @@ export class LocationService {
   constructor(
     private http: HttpClient,
     private urlService: UrlService,
-    @Inject(BROWSER_STORAGE) private storage: Storage
+    private storageService: StorageService
   ) {
   }
 
@@ -58,7 +57,7 @@ export class LocationService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: `Bearer ${this.storage.getItem('loc8r-token')}`
+        Authorization: `Bearer ${this.storageService.getItem('loc8r-token')}`
       })
     };
 
