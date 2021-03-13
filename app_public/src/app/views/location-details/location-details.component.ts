@@ -1,17 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '../../models/Location';
 import { Review } from '../../models/Review';
 import { LocationService } from '../../services/location.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { LoadingService } from '../../services/loading.service';
 import { finalize } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-location-details',
   templateUrl: './location-details.component.html',
   styleUrls: ['./location-details.component.scss']
 })
-export class LocationDetailsComponent implements OnInit {
+export class LocationDetailsComponent implements OnInit, OnDestroy {
 
   @Input() location: Location;
 
@@ -22,6 +23,8 @@ export class LocationDetailsComponent implements OnInit {
     rating: 5,
     reviewText: ''
   };
+
+  rSub: Subscription;
 
   public formVisible = false;
   public formError: string;
@@ -34,6 +37,12 @@ export class LocationDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    if (this.rSub) {
+      this.rSub.unsubscribe();
+    }
   }
 
   private formIsValid(): boolean {
@@ -64,7 +73,7 @@ export class LocationDetailsComponent implements OnInit {
     if (this.formIsValid()) {
       this.loadingService.loadingOn();
 
-      this.dataService
+      this.rSub = this.dataService
         .addReviewByLocationId(this.location._id, this.newReview)
         .pipe(
           finalize(() => this.loadingService.loadingOff())
