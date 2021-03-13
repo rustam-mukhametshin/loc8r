@@ -19,7 +19,7 @@ import { RegisterComponent } from './views/register/register.component';
 import { LoginComponent } from './views/login/login.component';
 import { LoadingComponent } from './views/_layout/loading/loading.component';
 import { LoadingService } from './services/loading.service';
-import { MessageComponent } from './views/components/message/message.component';
+import { MessageComponent } from './views/_layout/message/message.component';
 import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
