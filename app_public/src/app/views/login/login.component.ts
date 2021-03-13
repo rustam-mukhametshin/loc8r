@@ -4,9 +4,10 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { HistoryService } from '../../services/history.service';
 import { PageInfo } from '../../interfaces/PageInfo';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { Subscription, throwError } from 'rxjs';
 import { User } from '../../classes/user';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit, PageInfo, OnDestroy {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private historyService: HistoryService
+    private historyService: HistoryService,
+    private loadingService: LoadingService
   ) {
   }
 
@@ -72,6 +74,9 @@ export class LoginComponent implements OnInit, PageInfo, OnDestroy {
     if (this.form.invalid) {
       return;
     }
+
+    this.loadingService.loadingOn();
+
     this.doLogin();
   }
 
@@ -91,6 +96,9 @@ export class LoginComponent implements OnInit, PageInfo, OnDestroy {
           this.formError = err;
           console.error('While logging ...', err);
           return throwError(err);
+        }),
+        finalize(() => {
+          this.loadingService.loadingOff();
         })
       )
       .subscribe(() => {
