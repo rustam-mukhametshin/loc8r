@@ -4,6 +4,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { HistoryService } from '../../services/history.service';
 import { PageInfo } from '../../interfaces/PageInfo';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -71,7 +73,16 @@ export class LoginComponent implements OnInit, PageInfo {
   private doLogin(): void {
     this.authenticationService
       .login(this.credentials)
-      .then(() => this.router.navigateByUrl(this.historyService.getLastNonLoginUrl()))
-      .catch(err => this.formError = err);
+      .pipe(
+        catchError(err => {
+          this.formError = err;
+          console.error('While logging ...', err);
+          return throwError(err);
+        })
+      )
+      .subscribe(() => {
+        const lastUrl = this.historyService.getLastNonLoginUrl();
+        this.router.navigateByUrl(lastUrl);
+      });
   }
 }
