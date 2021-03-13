@@ -4,8 +4,8 @@ import { Location } from '../models/Location';
 import { Review } from '../models/Review';
 import { User } from '../classes/user';
 import { AuthResponse } from '../classes/authresponse';
-import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, shareReplay } from 'rxjs/operators';
 import { UrlService } from './url.service';
 import { StorageService } from './storage.service';
 
@@ -53,7 +53,7 @@ export class LocationService {
    * @param locationId
    * @param formData
    */
-  public addReviewByLocationId(locationId: string, formData: Review): Promise<Review> {
+  public addReviewByLocationId(locationId: string, formData: Review): Observable<Review> {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -63,11 +63,12 @@ export class LocationService {
 
     const url = this.urlService.getLocationReviews(locationId);
 
-    return this.http
-      .post(url, formData, httpOptions)
-      .toPromise()
-      .then(response => response as Review)
-      .catch(this.handleError);
+    return this.http.post<Review>(url, formData, httpOptions)
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        })
+      );
   }
 
   /**
