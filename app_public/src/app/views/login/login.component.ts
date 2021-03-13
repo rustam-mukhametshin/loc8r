@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { HistoryService } from '../../services/history.service';
 import { PageInfo } from '../../interfaces/PageInfo';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
 import { User } from '../../classes/user';
 
 @Component({
@@ -13,9 +13,11 @@ import { User } from '../../classes/user';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, PageInfo {
+export class LoginComponent implements OnInit, PageInfo, OnDestroy {
 
   form: FormGroup;
+
+  private lSub: Subscription;
 
   public formError = '';
 
@@ -36,6 +38,12 @@ export class LoginComponent implements OnInit, PageInfo {
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  ngOnDestroy(): void {
+    if (this.lSub) {
+      this.lSub.unsubscribe();
+    }
   }
 
   /**
@@ -76,7 +84,7 @@ export class LoginComponent implements OnInit, PageInfo {
 
     const user: User = this.form.value;
 
-    this.authenticationService
+    this.lSub = this.authenticationService
       .login(user)
       .pipe(
         catchError(err => {
