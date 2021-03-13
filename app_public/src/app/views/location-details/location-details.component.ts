@@ -3,6 +3,8 @@ import { Location } from '../../models/Location';
 import { Review } from '../../models/Review';
 import { LocationService } from '../../services/location.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { LoadingService } from '../../services/loading.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-location-details',
@@ -26,7 +28,8 @@ export class LocationDetailsComponent implements OnInit {
 
   constructor(
     private dataService: LocationService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private loadingService: LoadingService
   ) {
   }
 
@@ -59,14 +62,17 @@ export class LocationDetailsComponent implements OnInit {
     this.newReview.author = this.getUsername();
 
     if (this.formIsValid()) {
+      this.loadingService.loadingOn();
 
       this.dataService
         .addReviewByLocationId(this.location._id, this.newReview)
+        .pipe(
+          finalize(() => this.loadingService.loadingOff())
+        )
         .subscribe((review: Review) => {
+
           const reviews = this.location.reviews.slice(0);
-
           reviews.unshift(review);
-
           this.location.reviews = reviews;
 
           this.resetAndHideReviewForm();
