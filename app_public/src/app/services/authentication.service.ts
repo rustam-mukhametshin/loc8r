@@ -3,6 +3,8 @@ import { BROWSER_STORAGE } from '../classes/storage';
 import { User } from '../classes/user';
 import { LocationService } from './location.service';
 import { AuthResponse } from '../classes/authresponse';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,10 +39,12 @@ export class AuthenticationService {
    *
    * @param user: User
    */
-  public login(user: User): Promise<any> {
+  public login(user: User): Observable<AuthResponse> {
     return this.locationService
       .login(user)
-      .then((authResp: AuthResponse) => this.saveToken(authResp.token));
+      .pipe(
+        tap((authResp: AuthResponse) => this.saveToken(authResp.token))
+      );
   }
 
   /**
@@ -48,10 +52,12 @@ export class AuthenticationService {
    *
    * @param user: User
    */
-  public register(user: User): Promise<any> {
+  public register(user: User): Observable<AuthResponse> {
     return this.locationService
       .register(user)
-      .then((authResp: AuthResponse) => this.saveToken(authResp.token));
+      .pipe(
+        tap((authResp: AuthResponse) => this.saveToken(authResp.token))
+      );
   }
 
   /**
