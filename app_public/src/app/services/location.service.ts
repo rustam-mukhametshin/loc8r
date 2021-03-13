@@ -77,7 +77,7 @@ export class LocationService {
    *
    * @param user
    */
-  public login(user: User): Promise<AuthResponse> {
+  public login(user: User): Observable<AuthResponse> {
     return this.makeAuthApiCall('login', user);
   }
 
@@ -86,7 +86,7 @@ export class LocationService {
    *
    * @param user
    */
-  public register(user: User): Promise<AuthResponse> {
+  public register(user: User): Observable<AuthResponse> {
     return this.makeAuthApiCall('register', user);
   }
 
@@ -97,14 +97,17 @@ export class LocationService {
    * @param user
    * @private
    */
-  private makeAuthApiCall(urlPath: string, user: User): Promise<AuthResponse> {
+  private makeAuthApiCall(urlPath: string, user: User): Observable<AuthResponse> {
     const url = this.urlService.getAuthPath(urlPath);
 
     return this.http
-      .post(url, user)
-      .toPromise()
-      .then(response => response as AuthResponse)
-      .catch(this.handleError);
+      .post<AuthResponse>(url, user)
+      .pipe(
+        shareReplay(),
+        catchError(err => {
+          return throwError(err);
+        })
+      );
   }
 
   /**
