@@ -24,6 +24,7 @@ import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 const layout = [
   FrameworkComponent,
@@ -53,6 +54,7 @@ const components = [
 const material = [
   MatProgressSpinnerModule,
   MatInputModule,
+  MatButtonModule
 ];
 
 @NgModule({
