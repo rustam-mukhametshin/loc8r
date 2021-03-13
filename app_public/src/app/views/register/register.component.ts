@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { HistoryService } from '../../services/history.service';
 import { PageInfo } from '../../interfaces/PageInfo';
+import { Subscription, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit, PageInfo {
+export class RegisterComponent implements OnInit, PageInfo, OnDestroy {
+
+  private rSub: Subscription;
 
   public formError = '';
 
@@ -37,6 +41,12 @@ export class RegisterComponent implements OnInit, PageInfo {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    if (this.rSub) {
+      this.rSub.unsubscribe();
+    }
+  }
+
   /**
    * Submit to register
    */
@@ -55,9 +65,19 @@ export class RegisterComponent implements OnInit, PageInfo {
    * @private
    */
   private doRegister(): void {
-    this.authenticationService
+    this.rSub = this.authenticationService
       .register(this.credentials)
-      .then(() => this.router.navigateByUrl(this.historyService.getLastNonLoginUrl()))
-      .catch(err => this.formError = err);
+      .pipe(
+        catchError(err => {
+          this.formError = err.error.message;
+          console.error('While logging ...', err);
+          return throwError(err);
+        }),
+      )
+      .subscribe(() => {
+        const lastUrl = this.historyService.getLastNonLoginUrl();
+        this.router.navigateByUrl(lastUrl);
+      })
+    ;
   }
 }
