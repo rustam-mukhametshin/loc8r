@@ -65,6 +65,7 @@ export class LocationService {
 
     return this.http.post<Review>(url, formData, httpOptions)
       .pipe(
+        shareReplay(),
         catchError(err => {
           return throwError(err);
         })
