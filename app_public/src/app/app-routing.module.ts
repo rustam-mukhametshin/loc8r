@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { HomepageComponent } from '../views/homepage/homepage.component';
-import { DetailsPageComponent } from '../views/details-page/details-page.component';
-import { AboutComponent } from '../views/about/about.component';
-import { RegisterComponent } from '../views/register/register.component';
-import { LoginComponent } from '../views/login/login.component';
+import { HomepageComponent } from './views/homepage/homepage.component';
+import { DetailsPageComponent } from './views/details-page/details-page.component';
+import { AboutComponent } from './views/about/about.component';
+import { RegisterComponent } from './views/register/register.component';
+import { LoginComponent } from './views/login/login.component';
 
 const routes: Routes = [
   {

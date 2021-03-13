@@ -14,7 +14,7 @@ import { DetailsPageComponent } from './views/details-page/details-page.componen
 import { LocationDetailsComponent } from './views/location-details/location-details.component';
 import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './views/register/register.component';
 import { LoginComponent } from './views/login/login.component';
 import { LoadingComponent } from './views/_layout/loading/loading.component';
