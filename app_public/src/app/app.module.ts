@@ -25,11 +25,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { FooterComponent } from './views/_layout/footer/footer.component';
+import { HeaderComponent } from './views/_layout/header/header.component';
 
 const layout = [
   FrameworkComponent,
   PageHeaderComponent,
   LoadingComponent,
+  FooterComponent,
+  HeaderComponent,
 ];
 
 const pipes = [
