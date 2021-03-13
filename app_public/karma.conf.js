@@ -24,15 +24,15 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
-    browsers: ['Chrome', 'ChromeHeadless', 'ChromeHeadlessCI'],
+    autoWatch: false,
+    browsers: ['ChromeHeadless', 'ChromeHeadlessCI'],
     customLaunchers: {
       ChromeHeadlessCI: {
         base: 'ChromeHeadless',
         flags: ['--no-sandbox']
       }
     },
-    singleRun: false,
-    restartOnFileChange: true
+    // singleRun: false, Karma captures browsers, runs the tests and exits
+    restartOnFileChange: false
   });
 };
