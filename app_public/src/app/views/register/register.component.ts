@@ -75,7 +75,7 @@ export class RegisterComponent implements OnInit, PageInfo, OnDestroy {
       .pipe(
         catchError(err => {
           this.formError = err.error.message;
-          console.error('While logging ...', err);
+          console.error('While registering ...', err);
           return throwError(err);
         }),
         finalize(() => {
