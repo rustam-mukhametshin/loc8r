@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '../models/Location';
 import { Review } from '../models/Review';
 import { User } from '../models/user';
-import { AuthResponse } from '../classes/authresponse';
+import { AuthResponse } from '../models/authresponse';
 import { Observable, throwError } from 'rxjs';
 import { catchError, shareReplay } from 'rxjs/operators';
 import { UrlService } from './url.service';
