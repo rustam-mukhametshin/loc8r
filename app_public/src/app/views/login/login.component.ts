@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { HistoryService } from '../../services/history.service';
-import { PageInfo } from '../../interfaces/PageInfo';
+import { PageInfo } from '../../models/PageInfo';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError, finalize } from 'rxjs/operators';
 import { Subscription, throwError } from 'rxjs';
@@ -26,8 +26,7 @@ export class LoginComponent implements OnInit, PageInfo, OnDestroy {
 
   public pageContent = {
     header: {
-      title: 'Sign in to Loc8r',
-      strapline: ''
+      title: 'Sign in to Loc8r'
     },
     sidebar: ''
   };

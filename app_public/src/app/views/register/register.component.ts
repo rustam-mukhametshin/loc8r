@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { HistoryService } from '../../services/history.service';
-import { PageInfo } from '../../interfaces/PageInfo';
+import { PageInfo } from '../../models/PageInfo';
 import { Subscription, throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { LoadingService } from '../../services/loading.service';
@@ -26,8 +26,7 @@ export class RegisterComponent implements OnInit, PageInfo, OnDestroy {
 
   public pageContent = {
     header: {
-      title: 'Create a new account',
-      strapline: ''
+      title: 'Create a new account'
     },
     sidebar: ''
   };

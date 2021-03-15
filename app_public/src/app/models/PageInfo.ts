@@ -2,7 +2,7 @@ export interface PageInfo {
   pageContent: {
     header: {
       title: string,
-      strapline: string
+      subtitle?: string
     },
     sidebar: string
   };

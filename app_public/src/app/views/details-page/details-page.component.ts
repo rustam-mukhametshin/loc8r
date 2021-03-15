@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { LocationService } from '../../services/location.service';
 import { switchMap } from 'rxjs/operators';
 import { Location } from '../../models/Location';
-import { PageInfo } from '../../interfaces/PageInfo';
+import { PageInfo } from '../../models/PageInfo';
 
 
 @Component({
@@ -24,8 +24,7 @@ export class DetailsPageComponent implements OnInit, PageInfo {
 
   public pageContent = {
     header: {
-      title: '',
-      strapline: ''
+      title: ''
     },
     sidebar: ''
   };
