@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { BROWSER_STORAGE } from '../classes/storage';
-import { User } from '../classes/user';
+import { User } from '../models/user';
 import { LocationService } from './location.service';
 import { AuthResponse } from '../classes/authresponse';
 import { tap } from 'rxjs/operators';

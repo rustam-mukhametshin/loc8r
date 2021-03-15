@@ -6,7 +6,7 @@ import { PageInfo } from '../../interfaces/PageInfo';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError, finalize } from 'rxjs/operators';
 import { Subscription, throwError } from 'rxjs';
-import { User } from '../../classes/user';
+import { User } from '../../models/user';
 import { LoadingService } from '../../services/loading.service';
 
 @Component({
