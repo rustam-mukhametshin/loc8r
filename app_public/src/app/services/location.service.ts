@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '../models/Location';
 import { Review } from '../models/Review';
-import { User } from '../models/user';
-import { AuthResponse } from '../models/authresponse';
 import { Observable, throwError } from 'rxjs';
 import { catchError, shareReplay } from 'rxjs/operators';
 import { UrlService } from './url.service';
@@ -64,44 +62,6 @@ export class LocationService {
     const url = this.urlService.getLocationReviews(locationId);
 
     return this.http.post<Review>(url, formData, httpOptions)
-      .pipe(
-        shareReplay(),
-        catchError(err => {
-          return throwError(err);
-        })
-      );
-  }
-
-  /**
-   * Login
-   *
-   * @param user
-   */
-  public login(user: User): Observable<AuthResponse> {
-    return this.makeAuthApiCall('login', user);
-  }
-
-  /**
-   * Registration
-   *
-   * @param user
-   */
-  public register(user: User): Observable<AuthResponse> {
-    return this.makeAuthApiCall('register', user);
-  }
-
-  /**
-   * Make auth api call
-   *
-   * @param urlPath
-   * @param user
-   * @private
-   */
-  private makeAuthApiCall(urlPath: string, user: User): Observable<AuthResponse> {
-    const url = this.urlService.getAuthPath(urlPath);
-
-    return this.http
-      .post<AuthResponse>(url, user)
       .pipe(
         shareReplay(),
         catchError(err => {
