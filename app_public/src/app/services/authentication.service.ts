@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { User } from '../models/user';
-import { LocationService } from './location.service';
 import { AuthResponse } from '../models/authresponse';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { UrlService } from './url.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,9 @@ export class AuthenticationService {
   name = 'loc8r-token';
 
   constructor(
+    private httpClient: HttpClient,
     private storageService: StorageService,
-    private locationService: LocationService
+    private urlService: UrlService
   ) {
   }
 
@@ -40,8 +42,7 @@ export class AuthenticationService {
    * @param user: User
    */
   public login(user: User): Observable<AuthResponse> {
-    return this.locationService
-      .login(user)
+    return this.makeAuthApiCall('login', user)
       .pipe(
         tap((authResp: AuthResponse) => this.saveToken(authResp.token))
       );
@@ -53,10 +54,29 @@ export class AuthenticationService {
    * @param user: User
    */
   public register(user: User): Observable<AuthResponse> {
-    return this.locationService
-      .register(user)
+    return this.makeAuthApiCall('register', user)
       .pipe(
         tap((authResp: AuthResponse) => this.saveToken(authResp.token))
+      );
+  }
+
+  /**
+   * Make auth api call
+   *
+   * @param urlPath
+   * @param user
+   * @private
+   */
+  private makeAuthApiCall(urlPath: string, user: User): Observable<AuthResponse> {
+    const url = this.urlService.getAuthPath(urlPath);
+
+    return this.httpClient
+      .post<AuthResponse>(url, user)
+      .pipe(
+        shareReplay(),
+        catchError(err => {
+          return throwError(err);
+        })
       );
   }
 
