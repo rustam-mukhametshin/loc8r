@@ -1,5 +1,5 @@
-import { Inject, Injectable } from '@angular/core';
-import { BROWSER_STORAGE } from '../classes/storage';
+import { Injectable } from '@angular/core';
+import { StorageService } from './storage.service';
 import { User } from '../models/user';
 import { LocationService } from './location.service';
 import { AuthResponse } from '../models/authresponse';
@@ -14,7 +14,7 @@ export class AuthenticationService {
   name = 'loc8r-token';
 
   constructor(
-    @Inject(BROWSER_STORAGE) private storage: Storage,
+    private storageService: StorageService,
     private locationService: LocationService
   ) {
   }
@@ -23,7 +23,7 @@ export class AuthenticationService {
    * Get token from localstorage
    */
   public getToken(): string {
-    return this.storage.getItem(this.name);
+    return this.storageService.getItem(this.name);
   }
 
   /**
@@ -31,7 +31,7 @@ export class AuthenticationService {
    * @param token payload
    */
   public saveToken(token: string): void {
-    this.storage.setItem(this.name, token);
+    this.storageService.setItem(this.name, token);
   }
 
   /**
@@ -64,7 +64,7 @@ export class AuthenticationService {
    * Logout
    */
   public logout(): void {
-    this.storage.removeItem(this.name);
+    this.storageService.removeItem(this.name);
   }
 
   /**

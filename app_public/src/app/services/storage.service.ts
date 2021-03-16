@@ -14,4 +14,12 @@ export class StorageService {
   getItem(key: string): string | null {
     return this.storage.getItem(key);
   }
+
+  setItem(name: string, token: string): void {
+    this.storage.setItem(name, token);
+  }
+
+  removeItem(name: string): void {
+    this.storage.removeItem(name);
+  }
 }
