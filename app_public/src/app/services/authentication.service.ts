@@ -95,8 +95,8 @@ export class AuthenticationService {
 
     if (token) {
 
-      const paylod = JSON.parse(atob(token.split('.')[1]));
-      return paylod.exp > (Date.now() / 1000);
+      const payload = this.parsePayload(token);
+      return payload.exp > (Date.now() / 1000);
 
     }
 
@@ -115,5 +115,12 @@ export class AuthenticationService {
 
       return {email, name} as User;
     }
+  }
+
+  private parsePayload(token: string): { exp: number } {
+    const payload = token.split('.')[1];
+    const decodedString = atob(payload);
+
+    return JSON.parse(decodedString);
   }
 }
