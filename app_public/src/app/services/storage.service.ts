@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { BROWSER_STORAGE } from '../classes/storage';
+import { LOCAL_STORAGE } from '@ng-web-apis/common';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { BROWSER_STORAGE } from '../classes/storage';
 export class StorageService {
 
   constructor(
-    @Inject(BROWSER_STORAGE) private storage: Storage
+    @Inject(LOCAL_STORAGE) private storage: Storage
   ) {
   }
 
