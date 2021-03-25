@@ -7,7 +7,7 @@ import { FrameworkComponent } from './views/_layout/framework/framework.componen
 import { AboutComponent } from './views/about/about.component';
 import { HomepageComponent } from './views/homepage/homepage.component';
 import { PageHeaderComponent } from './views/page-header/page-header.component';
-import { SidebarComponent } from './views/sidebar/sidebar.component';
+import { SidebarComponent } from './views/_layout/sidebar/sidebar.component';
 import { HtmlLineBreaksPipe } from './pipes/html-line-breaks.pipe';
 import { RatingStarsComponent } from './views/components/rating-stars/rating-stars.component';
 import { DetailsPageComponent } from './views/details-page/details-page.component';
