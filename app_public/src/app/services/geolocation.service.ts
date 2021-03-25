@@ -3,7 +3,7 @@ import { NAVIGATOR } from '@ng-web-apis/common';
 import { MessageService } from './message.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-interface L {
+export interface L {
   lat: number;
   lng: number;
 }
