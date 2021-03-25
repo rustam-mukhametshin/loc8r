@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { NAVIGATOR } from '@ng-web-apis/common';
 import { MessageService } from './message.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { LoadingService } from './loading.service';
 
 export interface L {
   lat: number;
@@ -18,7 +19,8 @@ export class GeolocationService {
 
   constructor(
     @Inject(NAVIGATOR) private navigator: Navigator,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private loadingService: LoadingService
   ) {
   }
 
@@ -64,6 +66,7 @@ export class GeolocationService {
    */
   private cbError(err: any): void {
     this.messageService.showErrors(err.message);
+    this.loadingService.loadingOff();
   }
 
   /**
@@ -71,5 +74,6 @@ export class GeolocationService {
    */
   private cbNoGeo() {
     this.messageService.showErrors('Geolocation not supported by this browser');
+    this.loadingService.loadingOff();
   }
 }

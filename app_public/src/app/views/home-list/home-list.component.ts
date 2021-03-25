@@ -35,6 +35,7 @@ export class HomeListComponent implements OnInit {
    * @private
    */
   private getLocations(): void {
+    this.loadingService.loadingOn();
 
     this.locations$ = this.geolocationService.geolocation$
       .pipe(
