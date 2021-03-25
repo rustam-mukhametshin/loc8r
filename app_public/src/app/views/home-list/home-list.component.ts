@@ -18,7 +18,7 @@ export class HomeListComponent implements OnInit {
   public message: string;
 
   constructor(
-    private dataService: LocationService,
+    private locationService: LocationService,
     private geolocationService: GeolocationService,
     private loadingService: LoadingService,
     private messageService: MessageService
@@ -41,7 +41,7 @@ export class HomeListComponent implements OnInit {
         filter(d => d !== null),
         switchMap(nav => {
             const {lat, lng} = nav;
-            return this.dataService.getLocations(lat, lng)
+            return this.locationService.getLocations(lat, lng)
               .pipe(
                 tap(locations => locations.length > 0 ? '' : this.messageService.showErrors('No locations found')
                 ),
