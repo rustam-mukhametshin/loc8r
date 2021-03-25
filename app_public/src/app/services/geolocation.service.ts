@@ -25,21 +25,6 @@ export class GeolocationService {
   }
 
   /**
-   * Get user geolocation
-   *
-   * @param cbSuccess success
-   * @param cbError error
-   * @param cbNoGeo not supported
-   */
-  public getPosition(cbSuccess, cbError, cbNoGeo): void {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(cbSuccess, cbError);
-    } else {
-      cbNoGeo();
-    }
-  }
-
-  /**
    * Set geo position
    */
   setPosition(): void {

@@ -54,40 +54,4 @@ export class HomeListComponent implements OnInit {
         )
       );
   }
-
-  /**
-   * Any errors
-   *
-   * @param error
-   * @private
-   */
-  private showError(error: any): void {
-    this.messageService.showErrors(error.message);
-  }
-
-
-  /**
-   * Not supported geolocation
-   *
-   * @private
-   */
-  private noGeo(): void {
-    this.messageService.showErrors('Geolocation not supported by this browser');
-  }
-
-  /**
-   * Get locations base on geo position
-   *
-   * @private
-   */
-  private getPosition(): void {
-
-    this.loadingService.loadingOn();
-
-    this.geolocationService.getPosition(
-      this.getLocations.bind(this),
-      this.showError.bind(this),
-      this.noGeo.bind(this)
-    );
-  }
 }
