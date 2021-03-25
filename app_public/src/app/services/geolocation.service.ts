@@ -14,7 +14,7 @@ export interface L {
 export class GeolocationService {
 
   private subject = new BehaviorSubject<L>(null);
-  private location: Observable<L> = this.subject.asObservable();
+  geolocation$: Observable<L> = this.subject.asObservable();
 
   constructor(
     @Inject(NAVIGATOR) private navigator: Navigator,
