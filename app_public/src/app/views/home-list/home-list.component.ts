@@ -3,7 +3,7 @@ import { Location } from '../../models/Location';
 import { LocationService } from '../../services/location.service';
 import { GeolocationService } from '../../services/geolocation.service';
 import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { filter, finalize, switchMap, tap } from 'rxjs/operators';
 import { LoadingService } from '../../services/loading.service';
 import { MessageService } from '../../services/message.service';
 
@@ -26,7 +26,7 @@ export class HomeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getPosition();
+    this.getLocations();
   }
 
   /**
@@ -34,20 +34,23 @@ export class HomeListComponent implements OnInit {
    *
    * @private
    */
-  private getLocations(position): void {
+  private getLocations(): void {
 
-    const lat: number = position.coords.latitude;
-    const lng: number = position.coords.longitude;
-
-    const locations$ = this.dataService.getLocations(lat, lng);
-
-    this.locations$ = locations$
+    this.locations$ = this.geolocationService.geolocation$
       .pipe(
-        tap(locations => locations.length > 0 ? '' : this.messageService.showErrors('No locations found')
-        ),
-        finalize(() => {
-          this.loadingService.loadingOff();
-        })
+        filter(d => d !== null),
+        switchMap(nav => {
+            const {lat, lng} = nav;
+            return this.dataService.getLocations(lat, lng)
+              .pipe(
+                tap(locations => locations.length > 0 ? '' : this.messageService.showErrors('No locations found')
+                ),
+                finalize(() => {
+                  this.loadingService.loadingOff();
+                })
+              );
+          }
+        )
       );
   }
 
