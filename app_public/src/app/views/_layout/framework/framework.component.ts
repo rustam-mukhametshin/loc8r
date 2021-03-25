@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GeolocationService } from '../../../services/geolocation.service';
 
 @Component({
   selector: 'app-framework',
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class FrameworkComponent implements OnInit {
 
   constructor(
+    private geolocationService: GeolocationService
   ) {
+    this.geolocationService.setPosition();
   }
 
   ngOnInit(): void {
