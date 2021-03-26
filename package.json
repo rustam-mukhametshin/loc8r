@@ -4,12 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "heroku-postbuild": "npm install --prefix app_public && npm run build --prefix app_public",
     "editorconfig": "editorconfig-checker",
     "ng": "ng",
     "ng:start": "ng serve",
     "ng:start:hot": "ng serve --hmr",
-    "ng:build": "ng build --prod",
+    "build": "ng build --prod",
     "ng:test": "ng test",
     "ng:ci:test": "ng test -- --no-watch --no-progress --browsers=ChromeHeadlessCI",
     "ng:test:dev": "ng test --karmaConfig=karma.conf.dev.js",
