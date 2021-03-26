@@ -4,63 +4,75 @@
 [![Coverage Status](https://coveralls.io/repos/github/iproman/loc8r/badge.svg?branch=main)](https://coveralls.io/github/iproman/loc8r?branch=main)
 [![EditorConfig](https://github.com/iproman/loc8r/actions/workflows/editorconfig.yml/badge.svg?branch=main)](https://github.com/iproman/loc8r/actions/workflows/editorconfig.yml)
 
-Find places to work with wifi near you!
-
-## Using tech
-
-- Angular
-- NodeJs + ExpressJs
-- MongoDB
-- HTML5 geolocation
-- Pug (View in ExpressJs)
-- Scss
+Find places to work with wi-fi near you!
 
 ## Installation
 
-1. Install default packages in main folder
+1. Copy repo
+
+```
+git clone https://github.com/iproman/loc8r.git
+```
+or use GitHub CLI
+```
+gh repo clone iproman/loc8r
+```
+
+2. Install default packages in main folder
 
 ```
 ./ npm install
 ```
 
-2. Install angular in `app_public` folder
-
-```
-./app_public npm install
-```
-
 3. Install MongoDB
 
-- Go to MongoDB official site.
+- Go to MongoDB official site [MongoDB](https://karma-runner.github.io).
 
-## Run
+## Run dev
 
-1. Go to main folder `./` and run
+1. Run MongoDB
+
+2. Run server (api/server)
 
 ```
-    node nodemon
+  npm start
 ```
 
 - You'll see if MongoDB connected in console.
 
-2. Go to angular folder `./app_public` and run
+3. Run angular (front)
 
 ```
-    ng serve
+  npm start:ng
 ```
 
-3. Open Browsers
+4. Open Browsers
 
 - For angular `http://localhost:4200/`
 - For express `http://localhost:3000/`
 - API connection `http://localhost:3000/api/`
 
----
+## Tests (angular)
 
-## Default changes:
+### Running unit tests
 
-- `scss` instead of `css`
-- `angular` default folder for components `app/views`
-- `ng` disable test files when create component
-- `api` folder instead `app_api` for `express/mongo`
-- `server` folder instead `app_server` for `express`
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+### Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Code scaffolding for angular
+
+Run `ng generate component component-name` to generate a new component. You can also
+use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build angular
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag
+for a production build.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out
+the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
