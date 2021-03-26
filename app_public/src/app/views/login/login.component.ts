@@ -4,8 +4,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { HistoryService } from '../../services/history.service';
 import { PageInfo } from '../../models/PageInfo';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { catchError, finalize } from 'rxjs/operators';
-import { Subscription, throwError } from 'rxjs';
+import { catchError, finalize, takeUntil } from 'rxjs/operators';
+import { Subject, throwError } from 'rxjs';
 import { User } from '../../models/user';
 import { LoadingService } from '../../services/loading.service';
 
@@ -17,8 +17,7 @@ import { LoadingService } from '../../services/loading.service';
 export class LoginComponent implements OnInit, PageInfo, OnDestroy {
 
   form: FormGroup;
-
-  private lSub: Subscription;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   submitted: boolean;
 
@@ -44,9 +43,8 @@ export class LoginComponent implements OnInit, PageInfo, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.lSub) {
-      this.lSub.unsubscribe();
-    }
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   /**
@@ -91,9 +89,10 @@ export class LoginComponent implements OnInit, PageInfo, OnDestroy {
 
     const user: User = this.form.value;
 
-    this.lSub = this.authenticationService
+    this.authenticationService
       .login(user)
       .pipe(
+        takeUntil(this.destroy$),
         catchError(err => {
           this.formError = err.error.message;
           console.error('While logging ...', err);
