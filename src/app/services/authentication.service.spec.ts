@@ -67,4 +67,24 @@ describe('AuthenticationService', () => {
     expect(authenticationService.getToken()).toEqual(tokenValue, 'Get token');
 
   });
+
+  it('should check if user can login', done => {
+
+  });
+
+  it('should check if user can register', done => {
+
+  });
+
+  it('should check if user can logout', done => {
+
+  });
+
+  it('should check user status with isLoggenIn', done => {
+
+  });
+
+  it('should check active user with getCurrentUser', done => {
+
+  });
 });
