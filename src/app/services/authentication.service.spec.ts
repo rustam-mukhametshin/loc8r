@@ -45,6 +45,11 @@ describe('AuthenticationService', () => {
 
     authenticationService.getToken.and.callFake(() => localStorage.getItem(tokenName));
     authenticationService.saveToken.and.callFake((t) => localStorage.setItem(tokenName, t));
+    authenticationService.login.and.callFake(() => {});
+    authenticationService.register.and.callFake(() => {});
+    authenticationService.logout.and.callFake(() => {});
+    authenticationService.isLoggedIn.and.callFake(() => {});
+    authenticationService.getCurrentUser.and.callFake(() => {});
   });
 
   it('should getToken', () => {
