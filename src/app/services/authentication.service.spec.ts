@@ -43,7 +43,15 @@ describe('AuthenticationService', () => {
 
     user = userFixture;
 
+    authenticationService.getToken.and.callFake(() => localStorage.getItem(tokenName));
     authenticationService.saveToken.and.callFake((t) => localStorage.setItem(tokenName, t));
+  });
+
+  it('should getToken', () => {
+    // Same as save
+    expect(authenticationService.getToken()).toBeNull('Error with null');
+    authenticationService.saveToken(tokenValue);
+    expect(authenticationService.getToken()).toEqual(tokenValue, 'Get token');
   });
 
   it('should saveToken', () => {
