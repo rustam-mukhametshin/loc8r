@@ -1,11 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Location } from '../../models/Location';
-import { Review } from '../../models/Review';
-import { LocationService } from '../../services/location.service';
 import { AuthenticationService } from '../../services/authentication.service';
-import { LoadingService } from '../../services/loading.service';
-import { finalize } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-location-details',
@@ -18,17 +13,9 @@ export class LocationDetailsComponent {
 
   public googleAPIKey = 'Put your Google Maps API Key here';
 
-  public newReview: Review = {
-    author: '',
-    rating: 5,
-    reviewText: ''
-  };
-
   public formVisible = false;
-  public formError: string;
 
   constructor(
-    private dataService: LocationService,
     private authenticationService: AuthenticationService
   ) {
   }
