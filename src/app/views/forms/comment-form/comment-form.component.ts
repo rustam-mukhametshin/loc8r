@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { finalize, first } from 'rxjs/operators';
+import { finalize, first, takeUntil } from 'rxjs/operators';
 import { Review } from '../../../models/Review';
 import { LoadingService } from '../../../services/loading.service';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { LocationService } from '../../../services/location.service';
 import { Location } from '../../../models/Location';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -17,8 +17,6 @@ import { FormChangeService } from '../../../services/form-change.service';
 export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   form: FormGroup;
-
-  rSub: Subscription;
   private subject: Subject<void> = new Subject<void>();
 
   @Input() location: Location;
@@ -39,9 +37,6 @@ export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    if (this.rSub) {
-      this.rSub.unsubscribe();
-    }
     this.subject.next();
     this.subject.unsubscribe();
   }
@@ -81,9 +76,10 @@ export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.form.valid) {
       this.loadingService.loadingOn();
 
-      this.rSub = this.dataService
+      this.dataService
         .addReviewByLocationId(this.location._id, this.form.value)
         .pipe(
+          takeUntil(this.subject),
           finalize(() => this.loadingService.loadingOff())
         )
         .subscribe((review: Review) => {
