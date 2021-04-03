@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Location } from '../../../models/Location';
 
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
 })
-export class LocationComponent implements OnInit {
+export class LocationComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Input() location: Location;
 
 }
