@@ -4,6 +4,8 @@ import { LocationService } from '../../services/location.service';
 import { first, switchMap, tap } from 'rxjs/operators';
 import { Location } from '../../models/Location';
 import { PageInfo } from '../../models/PageInfo';
+import { Observable } from 'rxjs';
+import { FormChangeService } from '../../services/form-change.service';
 
 
 @Component({
@@ -18,7 +20,8 @@ export class DetailsPageComponent implements OnInit, PageInfo {
 
   constructor(
     private route: ActivatedRoute,
-    private dataService: LocationService
+    private dataService: LocationService,
+    private formChangeService: FormChangeService
   ) {
   }
 
@@ -50,5 +53,14 @@ export class DetailsPageComponent implements OnInit, PageInfo {
         first()
       )
       .subscribe((newLocation: Location) => this.location = newLocation);
+  }
+
+  canDeactivate(name: string): boolean | Observable<boolean> {
+
+    if (this.formChangeService.changed) {
+      return window.confirm(`${name}, there are unsaved changes! Are you sure?`);
+    }
+
+    return true;
   }
 }
