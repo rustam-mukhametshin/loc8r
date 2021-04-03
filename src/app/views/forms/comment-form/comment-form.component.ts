@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { Review } from '../../../models/Review';
 import { LoadingService } from '../../../services/loading.service';
@@ -13,7 +13,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './comment-form.component.html',
   styleUrls: ['./comment-form.component.scss']
 })
-export class CommentFormComponent implements OnInit, OnDestroy {
+export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   newReview: Review = {
     author: '',
@@ -44,6 +44,10 @@ export class CommentFormComponent implements OnInit, OnDestroy {
     if (this.rSub) {
       this.rSub.unsubscribe();
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.form.controls.author.setValue(this.getUsername());
   }
 
   private initForm(): void {
@@ -94,7 +98,7 @@ export class CommentFormComponent implements OnInit, OnDestroy {
   /**
    * Get username
    */
-  getUsername(): string {
+  private getUsername(): string {
     const {name} = this.authenticationService.getCurrentUser();
     return name ?? 'Guest';
   }
