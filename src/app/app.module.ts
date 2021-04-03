@@ -30,6 +30,7 @@ import { HeaderComponent } from './views/_layout/header/header.component';
 import { CommentFormComponent } from './views/forms/comment-form/comment-form.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { LocationComponent } from './views/components/location/location.component';
 
 const layout = [
   FrameworkComponent,
@@ -57,6 +58,7 @@ const components = [
   LoginComponent,
   MessageComponent,
   CommentFormComponent,
+  LocationComponent,
 ];
 
 const material = [
