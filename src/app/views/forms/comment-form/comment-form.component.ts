@@ -68,7 +68,7 @@ export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
       .pipe(
         first()
       )
-      .subscribe(_ => this.formChangeService.onFormChanged());
+      .subscribe(_ => this.formChangeService.formChanged());
   }
 
   onReviewSubmit() {
