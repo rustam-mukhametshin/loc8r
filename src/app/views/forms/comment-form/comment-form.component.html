@@ -1,9 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onReviewSubmit()">
   <hr>
   <h4>Add your review</h4>
-  <div *ngIf="formError" class="alert alert-danger" role="alert">
-    {{formError}}
-  </div>
 
   <mat-form-field appearance="outline">
     <mat-label>Rating</mat-label>

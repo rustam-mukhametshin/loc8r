@@ -15,13 +15,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  newReview: Review = {
-    author: '',
-    rating: 5,
-    reviewText: ''
-  };
   form: FormGroup;
-  formError: string;
 
   rSub: Subscription;
 
@@ -69,14 +63,12 @@ export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onReviewSubmit() {
-    this.formError = '';
-    this.newReview.author = this.getUsername();
 
-    if (this.formIsValid()) {
+    if (this.form.valid) {
       this.loadingService.loadingOn();
 
       this.rSub = this.dataService
-        .addReviewByLocationId(this.location._id, this.newReview)
+        .addReviewByLocationId(this.location._id, this.form.value)
         .pipe(
           finalize(() => this.loadingService.loadingOff())
         )
@@ -87,11 +79,10 @@ export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
             ...this.location.reviews
           ];
 
-          this.resetAndHideReviewForm();
+          this.changeFormVisibility.emit(false);
+          this.formVisible = false;
         })
       ;
-    } else {
-      this.formError = 'All fields required, please try again';
     }
   }
 
@@ -101,22 +92,5 @@ export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
   private getUsername(): string {
     const {name} = this.authenticationService.getCurrentUser();
     return name ?? 'Guest';
-  }
-
-  private formIsValid(): boolean {
-    return !!(this.newReview.author && this.newReview.rating && this.newReview.reviewText);
-  }
-
-  /**
-   * Reset form values
-   *
-   * @private
-   */
-  private resetAndHideReviewForm(): void {
-    this.changeFormVisibility.emit(false);
-    this.formVisible = false;
-    this.newReview.author = '';
-    this.newReview.rating = 5;
-    this.newReview.reviewText = '';
   }
 }
