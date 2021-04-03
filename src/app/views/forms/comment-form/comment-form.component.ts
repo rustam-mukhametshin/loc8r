@@ -20,7 +20,6 @@ export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
   private subject: Subject<void> = new Subject<void>();
 
   @Input() location: Location;
-  @Input() formVisible = false;
   @Output() changeFormVisibility = new EventEmitter<boolean>();
 
   constructor(
@@ -90,7 +89,6 @@ export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
           ];
 
           this.changeFormVisibility.emit(false);
-          this.formVisible = false;
         })
       ;
     }
