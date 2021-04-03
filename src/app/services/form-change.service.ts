@@ -9,8 +9,8 @@ export class FormChangeService {
   private subject: Subject<boolean> = new Subject<boolean>();
   formChanged: Observable<boolean> = this.subject.asObservable();
 
-  onFormChanged(val: boolean): void {
-    this.subject.next(val);
+  onFormChanged(): void {
+    this.subject.next(true);
   }
 
 }
