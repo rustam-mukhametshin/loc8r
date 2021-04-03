@@ -1,28 +1,32 @@
-<form (ngSubmit)="onReviewSubmit()">
+<form [formGroup]="form" (ngSubmit)="onReviewSubmit()">
   <hr>
   <h4>Add your review</h4>
   <div *ngIf="formError" class="alert alert-danger" role="alert">
     {{formError}}
   </div>
 
-  <div class="form-group row">
-    <label for="rating" class="col-sm-2 col-form-label">Rating</label>
-    <div class="col-sm-10 col-md-2">
-      <select [(ngModel)]="newReview.rating" id="rating" name="rating" class=”form-control”>
-        <ng-container *ngFor="let n of [1,2,3,4,5]">
-          <option [ngValue]="n">{{n}}</option>
-        </ng-container>
-      </select>
-    </div>
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Rating</mat-label>
+    <mat-select formControlName="rating">
+      <ng-container *ngFor="let n of [1,2,3,4,5]">
+        <mat-option [value]="n">
+          {{n}}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
 
-  <div class="form-group row">
-    <label for="review" class="col-sm-2 col-form-label">Review</label>
-    <div class="col-sm-10">
-                <textarea [(ngModel)]="newReview.reviewText" name="review" id="review" rows="5"
-                          class="form-control"></textarea>
-    </div>
-  </div>
+  <mat-form-field appearance="outline" class="fullWith">
+    <mat-label>Review</mat-label>
+    <textarea
+      matInput placeholder="ex. Amazing atmosphere" formControlName="reviewText"
+      rows="5"
+    ></textarea>
+
+    <mat-error *ngIf="form.controls.reviewText.hasError('required')">
+      reviewText is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
 
   <div class="form-group row">
     <div class="col-12">
