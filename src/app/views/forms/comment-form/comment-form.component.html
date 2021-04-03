@@ -26,12 +26,12 @@
   </mat-form-field>
 
   <div class="form-group row">
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary float-right" style="margin-left:15px">
-        Submit review
-      </button>
-      <button class="btn btn-default float-right" (click)="formVisible=false">
+    <div class="col-12 text-right">
+      <button mat-stroked-button (click)="changeFormVisibility.emit(false)" class="mr-lg-2">
         Cancel
+      </button>
+      <button mat-flat-button color="primary" type="submit">
+        Submit review
       </button>
     </div>
   </div>
