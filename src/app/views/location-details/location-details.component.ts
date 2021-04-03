@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './location-details.component.html',
   styleUrls: ['./location-details.component.scss']
 })
-export class LocationDetailsComponent implements OnInit, OnDestroy {
+export class LocationDetailsComponent {
 
   @Input() location: Location;
 
@@ -24,73 +24,13 @@ export class LocationDetailsComponent implements OnInit, OnDestroy {
     reviewText: ''
   };
 
-  rSub: Subscription;
-
   public formVisible = false;
   public formError: string;
 
   constructor(
     private dataService: LocationService,
-    private authenticationService: AuthenticationService,
-    private loadingService: LoadingService
+    private authenticationService: AuthenticationService
   ) {
-  }
-
-  ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-    if (this.rSub) {
-      this.rSub.unsubscribe();
-    }
-  }
-
-  private formIsValid(): boolean {
-    return !!(this.newReview.author && this.newReview.rating && this.newReview.reviewText);
-  }
-
-  /**
-   * Reset form values
-   *
-   * @private
-   */
-  private resetAndHideReviewForm(): void {
-    this.formVisible = false;
-    this.newReview.author = '';
-    this.newReview.rating = 5;
-    this.newReview.reviewText = '';
-  }
-
-
-  /**
-   * Create review
-   */
-  onReviewSubmit(): void {
-
-    this.formError = '';
-    this.newReview.author = this.getUsername();
-
-    if (this.formIsValid()) {
-      this.loadingService.loadingOn();
-
-      this.rSub = this.dataService
-        .addReviewByLocationId(this.location._id, this.newReview)
-        .pipe(
-          finalize(() => this.loadingService.loadingOff())
-        )
-        .subscribe((review: Review) => {
-
-          this.location.reviews = [
-            review,
-            ...this.location.reviews
-          ];
-
-          this.resetAndHideReviewForm();
-        })
-      ;
-    } else {
-      this.formError = 'All fields required, please try again';
-    }
   }
 
   /**
@@ -98,13 +38,5 @@ export class LocationDetailsComponent implements OnInit, OnDestroy {
    */
   public isLoggedIn(): boolean {
     return this.authenticationService.isLoggedIn();
-  }
-
-  /**
-   * Get username
-   */
-  public getUsername(): string {
-    const {name} = this.authenticationService.getCurrentUser();
-    return name ?? 'Guest';
   }
 }
