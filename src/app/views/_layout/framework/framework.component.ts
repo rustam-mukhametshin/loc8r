@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { GeolocationService } from '../../../services/geolocation.service';
 
 @Component({
   selector: 'app-framework',
   templateUrl: './framework.component.html',
-  styleUrls: ['./framework.component.scss']
+  styleUrls: ['./framework.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class FrameworkComponent implements OnInit {
 
