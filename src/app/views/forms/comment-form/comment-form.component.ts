@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { Review } from '../../../models/Review';
 import { LoadingService } from '../../../services/loading.service';
@@ -25,6 +25,7 @@ export class CommentFormComponent implements OnInit, OnDestroy {
 
   @Input() location: Location;
   @Input() formVisible = false;
+  @Output() changeFormVisibility = new EventEmitter<boolean>();
 
   constructor(
     private dataService: LocationService,
@@ -87,6 +88,7 @@ export class CommentFormComponent implements OnInit, OnDestroy {
    * @private
    */
   private resetAndHideReviewForm(): void {
+    this.changeFormVisibility.emit(false);
     this.formVisible = false;
     this.newReview.author = '';
     this.newReview.rating = 5;

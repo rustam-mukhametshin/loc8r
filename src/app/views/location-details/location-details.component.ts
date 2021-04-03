@@ -39,4 +39,8 @@ export class LocationDetailsComponent {
   public isLoggedIn(): boolean {
     return this.authenticationService.isLoggedIn();
   }
+
+  changeFormVisibility(val: boolean): void {
+    this.formVisible = val;
+  }
 }
