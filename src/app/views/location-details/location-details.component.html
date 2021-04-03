@@ -65,11 +65,9 @@
               <label for="rating" class="col-sm-2 col-form-label">Rating</label>
               <div class="col-sm-10 col-md-2">
                 <select [(ngModel)]="newReview.rating" id="rating" name="rating" class=”form-control”>
-                  <option [ngValue]="5">5</option>
-                  <option [ngValue]="4">4</option>
-                  <option [ngValue]="3">3</option>
-                  <option [ngValue]="2">2</option>
-                  <option [ngValue]="1">1</option>
+                  <ng-container *ngFor="let n of [1,2,3,4,5]">
+                    <option [ngValue]="n">{{n}}</option>
+                  </ng-container>
                 </select>
               </div>
             </div>
