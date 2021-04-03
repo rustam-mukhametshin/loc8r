@@ -6,6 +6,7 @@ import { DetailsPageComponent } from './views/details-page/details-page.componen
 import { AboutComponent } from './views/about/about.component';
 import { RegisterComponent } from './views/register/register.component';
 import { LoginComponent } from './views/login/login.component';
+import { CanDeactivateService } from './guards/can-deactivate.service';
 
 const routes: Routes = [
   {
@@ -14,7 +15,10 @@ const routes: Routes = [
   },
   {
     path: 'location/:locationId',
-    component: DetailsPageComponent
+    component: DetailsPageComponent,
+    canDeactivate: [
+      CanDeactivateService,
+    ]
   },
   {
     path: 'about',
@@ -36,6 +40,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forRoot(routes),
+  ],
+  providers: [
+    CanDeactivateService,
   ],
   exports: [
     RouterModule,
