@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { Review } from '../../../models/Review';
 import { LoadingService } from '../../../services/loading.service';
@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { LocationService } from '../../../services/location.service';
 import { Location } from '../../../models/Location';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-comment-form',
@@ -19,6 +20,7 @@ export class CommentFormComponent implements OnInit, OnDestroy {
     rating: 5,
     reviewText: ''
   };
+  form: FormGroup;
   formError: string;
 
   rSub: Subscription;
@@ -35,12 +37,31 @@ export class CommentFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.initForm();
   }
 
   ngOnDestroy(): void {
     if (this.rSub) {
       this.rSub.unsubscribe();
     }
+  }
+
+  private initForm(): void {
+    this.form = new FormGroup(
+      {
+        author: new FormControl('', [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(255),
+        ]),
+        rating: new FormControl(5),
+        reviewText: new FormControl('', [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(255),
+        ])
+      }
+    );
   }
 
   onReviewSubmit() {
