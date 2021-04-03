@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { finalize, takeUntil } from 'rxjs/operators';
+import { finalize, first } from 'rxjs/operators';
 import { Review } from '../../../models/Review';
 import { LoadingService } from '../../../services/loading.service';
 import { Subject, Subscription } from 'rxjs';
@@ -71,7 +71,7 @@ export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
   private initFormChangesSub(): void {
     this.form.controls.reviewText.valueChanges
       .pipe(
-        takeUntil(this.subject)
+        first()
       )
       .subscribe(_ => this.formChangeService.onFormChanged());
   }
