@@ -1,12 +1,13 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { Review } from '../../../models/Review';
 import { LoadingService } from '../../../services/loading.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { LocationService } from '../../../services/location.service';
 import { Location } from '../../../models/Location';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormChangeService } from '../../../services/form-change.service';
 
 @Component({
   selector: 'app-comment-form',
@@ -18,6 +19,7 @@ export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
   form: FormGroup;
 
   rSub: Subscription;
+  private subject: Subject<void> = new Subject<void>();
 
   @Input() location: Location;
   @Input() formVisible = false;
@@ -26,18 +28,22 @@ export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private dataService: LocationService,
     private authenticationService: AuthenticationService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private formChangeService: FormChangeService
   ) {
   }
 
   ngOnInit(): void {
     this.initForm();
+    this.initFormChangesSub();
   }
 
   ngOnDestroy(): void {
     if (this.rSub) {
       this.rSub.unsubscribe();
     }
+    this.subject.next();
+    this.subject.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -60,6 +66,14 @@ export class CommentFormComponent implements OnInit, OnDestroy, AfterViewInit {
         ])
       }
     );
+  }
+
+  private initFormChangesSub(): void {
+    this.form.controls.reviewText.valueChanges
+      .pipe(
+        takeUntil(this.subject)
+      )
+      .subscribe(_ => this.formChangeService.onFormChanged());
   }
 
   onReviewSubmit() {
